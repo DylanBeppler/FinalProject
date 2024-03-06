@@ -175,13 +175,15 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `content_vote` ;
 
 CREATE TABLE IF NOT EXISTS `content_vote` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
   `content_id` INT NOT NULL,
   `upvoted` TINYINT NULL,
   `vote_date` DATETIME NULL,
-  PRIMARY KEY (`user_id`, `content_id`),
+  PRIMARY KEY (`id`, `user_id`, `content_id`),
   INDEX `fk_user_has_content_content1_idx` (`content_id` ASC),
   INDEX `fk_user_has_content_user1_idx` (`user_id` ASC),
+  UNIQUE INDEX `user_id_UNIQUE` (`id` ASC),
   CONSTRAINT `fk_user_has_content_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `user` (`id`)
@@ -210,9 +212,9 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `wowcontentdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `join_date`, `email`, `role`, `about_me`, `avatar_url`, `last_updated`, `battletag`) VALUES (1, 'blake', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, '2024/03/04', 'blake', '1', 'test', 'test', '2024/03/04', 'test');
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `join_date`, `email`, `role`, `about_me`, `avatar_url`, `last_updated`, `battletag`) VALUES (2, 'zach', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, '2024/03/04', 'zach', '1', 'test', 'test', '2024/03/04', 'test');
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `join_date`, `email`, `role`, `about_me`, `avatar_url`, `last_updated`, `battletag`) VALUES (3, 'dylan', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, '2024/03/04', 'dylan', '1', 'test', 'test', '2024/03/04', 'test');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `join_date`, `email`, `role`, `about_me`, `avatar_url`, `last_updated`, `battletag`) VALUES (1, 'blake', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, '2024/03/04', 'blake', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `join_date`, `email`, `role`, `about_me`, `avatar_url`, `last_updated`, `battletag`) VALUES (2, 'zach', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, '2024/03/04', 'zach', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `join_date`, `email`, `role`, `about_me`, `avatar_url`, `last_updated`, `battletag`) VALUES (3, 'dylan', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, '2024/03/04', 'dylan', NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
@@ -222,9 +224,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `wowcontentdb`;
-INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (1, 'Quest', 'test', 'test');
-INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (2, 'Mount', 'test', 'test');
-INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (3, 'Boss', 'test', 'test');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (1, 'Quest', NULL, NULL);
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (2, 'Mount', NULL, NULL);
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (3, 'Boss', NULL, NULL);
 
 COMMIT;
 
@@ -240,41 +242,11 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `content_has_content`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `wowcontentdb`;
-INSERT INTO `content_has_content` (`content_id`, `content_id1`) VALUES (1, 1);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `image_url`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `wowcontentdb`;
-INSERT INTO `image_url` (`id`, `url`, `caption`, `created_date`, `update_date`, `content_id`, `enabled`) VALUES (1, 'url', 'caption', '2024-03-04', '2024-03-04', 1, 1);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `content_comment`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `wowcontentdb`;
-INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (1, '2024-03-04', 'test', 1, 1, 1, 1, 'test', '2024-03-04');
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `content_vote`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `wowcontentdb`;
-INSERT INTO `content_vote` (`user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (1, 1, true, '2024-03-04');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (1, 1, 1, NULL, '2024/03/05');
 
 COMMIT;
 
