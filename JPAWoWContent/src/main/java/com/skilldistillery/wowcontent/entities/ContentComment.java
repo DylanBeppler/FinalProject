@@ -43,7 +43,7 @@ public class ContentComment {
 		super();
 	}
 
-//	public ContentComment(int id, LocalDateTime commentDate, String message, User user, Content content, int replyTo,
+//	public ContentComment(int id, LocalDateTime commentDate, String message, User user, Content content, int replyToId,
 //			boolean enabled, String imageUrl, LocalDateTime updatedDate) {
 //		super();
 //		this.id = id;
@@ -51,7 +51,7 @@ public class ContentComment {
 //		this.message = message;
 //		this.user = user;
 //		this.content = content;
-//		this.replyTo = replyTo;
+//		this.replyTo = replyToId;
 //		this.enabled = enabled;
 //		this.imageUrl = imageUrl;
 //		this.updatedDate = updatedDate;
@@ -150,7 +150,7 @@ public class ContentComment {
 //	@Override
 //	public String toString() {
 //		return "contentComment [id=" + id + ", commentDate=" + commentDate + ", message=" + message + ", user=" + user
-//				+ ", content=" + content + ", replyTo=" + replyTo + ", enabled=" + enabled + ", imageUrl=" + imageUrl
+//				+ ", content=" + content + ", replyTo=" + replyToId + ", enabled=" + enabled + ", imageUrl=" + imageUrl
 //				+ ", updatedDate=" + updatedDate + "]";
 //	}
 
