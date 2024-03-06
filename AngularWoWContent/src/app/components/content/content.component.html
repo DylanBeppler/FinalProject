@@ -1,0 +1,67 @@
+<div>
+  <table class="table table-striped table-hover table-dark">
+    <thead class="table-dark">
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <td>Category</td>
+      <th>Image</th>
+      <td>Date Created</td>
+      <td>Last Updated</td>
+    </thead>
+    <tbody>
+      <tr *ngFor="let content of allContent">
+        <td>{{content.id}}</td>
+        <td>{{content.name}}</td>
+        <td>{{content.description}}</td>
+        <td>{{content.category}}</td>
+        <td>{{content.imageUrl}}</td>
+        <td>{{content.createdDate}}</td>
+        <td>{{content.updateDate}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="newContent" *ngIf="newContent">
+    <form>
+      <label for="name">Name</label>
+      <input type="text" name="name" [(ngModel)]="newContent.name"> <br>
+      <label for="description">Description</label>
+      <input type="text" name="description" [(ngModel)]="newContent.description"> <br>
+      <label for="category">Category</label>
+      <input type="text" name="category" [(ngModel)]="newContent.description"> <br>
+      <label for="description">Image</label>
+      <input type="text" name="imageUrl" [(ngModel)]="newContent.imageUrl"> <br>
+      <button (click)="addContent(newContent)">Create</button>
+    </form>
+  </div>
+
+  <div id="editContent" *ngIf="editContent">
+    <form>
+      <label for="name">Name</label>
+      <input type="text" name="name" [(ngModel)]="newContent.name"> <br>
+      <label for="description">Description</label>
+      <input type="text" name="description" [(ngModel)]="newContent.description"> <br>
+      <label for="description">Image</label>
+      <input type="image" name="imageUrl" [(ngModel)]="newContent.imageUrl"> <br>
+      <button (click)="addContent(newContent)">Create</button>
+      <button (click)="editContent = null">Cancel</button>
+    </form>
+  </div>
+
+
+
+
+  <!-- <div id="todoDetail" *ngIf="selected && ! editTodo">
+  <h4>ID: {{selected.id}}</h4>
+  <p>{{selected.task}}</p>
+  <p>Completed? {{selected.completed}}</p>
+  <p>Complete Date: {{selected.completeDate}}</p>
+  <p>Description: <br>
+    {{selected.description}}
+  </p>
+  <button class="btn btn-outline-danger" (click)="displayTable()">Back</button>
+      <button (click)="editTodo = null">Cancel</button>
+
+  <button class="btn btn-outline-primary" (click)="setEditTodo()">Edit</button>
+</div> -->
