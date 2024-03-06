@@ -45,6 +45,7 @@ public class ContentServiceImpl implements ContentService {
 	public Content update(String userName, int contentId, Content content) {
 		Content managedContent = contentRepo.findByUser_UsernameAndId(userName, contentId);
 		if(managedContent !=null) {
+			managedContent.setName(content.getName());
 			managedContent.setContentCategory(content.getContentCategory());
 			managedContent.setContentComments(content.getContentComments());
 			managedContent.setContentVotes(content.getContentVotes());
