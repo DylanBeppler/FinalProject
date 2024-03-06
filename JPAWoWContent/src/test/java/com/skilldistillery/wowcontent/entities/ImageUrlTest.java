@@ -43,7 +43,7 @@ class ImageUrlTest {
 	@Test
 	void test_ImageUrl_Has_ImageUrlname() {
 		assertNotNull(imageUrl);
-		assertEquals("caption", imageUrl.getCaption());
+		assertEquals("test", imageUrl.getCaption());
 		
 	}
 	

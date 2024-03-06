@@ -3,6 +3,8 @@ package com.skilldistillery.wowcontent.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ public class ImageUrl {
 	private boolean enabled;
 	@ManyToOne
 	@JoinColumn(name = "content_id")
+	@JsonIgnore
 	private Content content;
 
 	public ImageUrl() {

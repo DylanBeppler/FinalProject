@@ -46,15 +46,14 @@ public class User {
 	@Column(name = "join_date")
 	private LocalDateTime joinDate;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private List<Content> userContent;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<ContentComment> userComments;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<ContentVote> contentVotes;
 
