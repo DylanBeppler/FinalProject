@@ -3,6 +3,8 @@ package com.skilldistillery.wowcontent.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,22 +20,30 @@ public class ContentComment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	@Column(name = "comment_date")
 	private LocalDateTime commentDate;
+	
 	private String message;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private User user;
 
 	@ManyToOne
     @JoinColumn(name = "content_id")
+	@JsonIgnore
 	private Content content;
+	
 	@Column(name = "reply_to_id")
 	private int replyToId;
+	
 	private boolean enabled;
+	
 	@Column(name = "image_url")
 	private String imageUrl;
+	
 	@Column(name = "updated_date")
 	private LocalDateTime updatedDate;
 
