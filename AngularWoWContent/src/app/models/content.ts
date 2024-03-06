@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export class Content {
   id: number;
   name: string;
@@ -5,7 +7,8 @@ export class Content {
   imageUrl: string;
   enabled: boolean;
   createdDate: string;
-  updateDate: string | null;;
+  updateDate: string | null;
+  category: string;
 
   constructor(
     id: number = 0,
@@ -14,7 +17,8 @@ export class Content {
     imageUrl: string = '',
     enabled: boolean = false,
     createdDate: string = '',
-    updateDate: string = ''
+    updateDate: string = '',
+    category: string= ''
   ) {
     this.id = id;
     this.name = name;
@@ -23,5 +27,7 @@ export class Content {
     this.enabled = enabled;
     this.createdDate = createdDate;
     this.updateDate = updateDate;
+    this.category = category;
+
   }
 }
