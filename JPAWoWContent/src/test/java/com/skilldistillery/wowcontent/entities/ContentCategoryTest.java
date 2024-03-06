@@ -1,6 +1,7 @@
 package com.skilldistillery.wowcontent.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -12,10 +13,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class UserTest {
+class ContentCategoryTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private ContentCategory contentCategory;
 
 	
 	@BeforeAll
@@ -31,35 +32,21 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		contentCategory = em.find(ContentCategory.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		contentCategory = null;
 	}
 
 	@Test
 	void test_User_Has_Username() {
-		assertNotNull(user);
-		assertEquals("blake", user.getUsername());
+		assertNotNull(contentCategory);
+		assertEquals("Quest", contentCategory.getName());
 		
 	}
-	
-//	@Test
-//	void test_User_Has_Content() {
-//		assertNotNull(user);
-//		assertTrue(user.getUserContent().size() > 0);
-//		
-//	}
-//	
-//	@Test
-//	void test_User_Has_Comment_Vote() {
-//		assertNotNull(user);
-//		assertTrue(user.getContentVote().size() > 0);
-//		
-//	}
 	
 //	@Test
 //	void test_User_Has_Quests() {

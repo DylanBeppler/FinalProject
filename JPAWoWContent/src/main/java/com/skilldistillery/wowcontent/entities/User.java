@@ -1,15 +1,19 @@
 package com.skilldistillery.wowcontent.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -22,26 +26,38 @@ public class User {
 	private int id;
 
 	private String username;
-	private String email;
 	private String password;
+	private String email;
 	private boolean enabled;
 	private String role;
+	private String battletag;
+
+
+	@Column(name = "about_me")
+	private String aboutMe;
+
+	@Column(name = "avatar_url")
+	private String avatarUrl;
+
+	@CreationTimestamp
+	@Column(name = "last_updated")
+	private LocalDateTime lastUpdated;
 
 	@CreationTimestamp
 	@Column(name = "join_date")
 	private LocalDateTime joinDate;
-
+//
 //	@JsonIgnore
 //	@OneToMany(mappedBy = "user")
-//	private List<Mount> todos;
-//	
+//	private List<Content> userContent;
+//
 //	@JsonIgnore
 //	@OneToMany(mappedBy = "user")
-//	private List<Quest> quest;
-//	
+//	private List<Comment> userComments;
+//
 //	@JsonIgnore
 //	@OneToMany(mappedBy = "user")
-//	private List<Boss> boss;
+//	private List<ContentVote> contentVotes;
 
 	public int getId() {
 		return id;
@@ -59,20 +75,20 @@ public class User {
 		this.username = username;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public boolean isEnabled() {
@@ -90,7 +106,31 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
+	public String getAboutMe() {
+		return aboutMe;
+	}
+
+	public void setAboutMe(String aboutMe) {
+		this.aboutMe = aboutMe;
+	}
+
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
+
+	public LocalDateTime getLastUpdated() {
+		return lastUpdated;
+	}
+
+	public void setLastUpdated(LocalDateTime lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
+
 	public LocalDateTime getJoinDate() {
 		return joinDate;
 	}
@@ -98,6 +138,38 @@ public class User {
 	public void setJoinDate(LocalDateTime joinDate) {
 		this.joinDate = joinDate;
 	}
+
+	public String getBattletag() {
+		return battletag;
+	}
+
+	public void setBattletag(String battletag) {
+		this.battletag = battletag;
+	}
+
+//	public List<Content> getUserContent() {
+//		return userContent;
+//	}
+//
+//	public void setUserContent(List<Content> userContent) {
+//		this.userContent = userContent;
+//	}
+//
+//	public List<Comment> getUserComments() {
+//		return userComments;
+//	}
+//
+//	public void setUserComments(List<Comment> userComments) {
+//		this.userComments = userComments;
+//	}
+//
+//	public List<ContentVote> getContentVotes() {
+//		return contentVotes;
+//	}
+//
+//	public void setContentVotes(List<ContentVote> contentVotes) {
+//		this.contentVotes = contentVotes;
+//	}
 
 	@Override
 	public int hashCode() {
@@ -115,12 +187,12 @@ public class User {
 		User other = (User) obj;
 		return id == other.id;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
-				+ ", enabled=" + enabled + ", role=" + role + ", joinDate=" + joinDate + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", enabled=" + enabled + ", role=" + role + ", battletag=" + battletag + ", aboutMe=" + aboutMe
+				+ ", avatarUrl=" + avatarUrl + ", lastUpdated=" + lastUpdated + ", joinDate=" + joinDate + "]";
 	}
-
 
 }
