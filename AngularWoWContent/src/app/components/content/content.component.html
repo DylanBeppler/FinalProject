@@ -1,0 +1,51 @@
+<!--
+<div>
+  <table class="table table-striped table-hover table-dark">
+    <thead class="table-dark">
+      <th>Name</th>
+      <th>description</th>
+      <th>Completed</th>
+      <th>Delete</th> -->
+    <!-- </thead>
+    <tbody>
+      <tr></tr>
+
+    </tbody>
+  </table>
+  <form class="form-control form-label form-group form-check form-inline">
+    <input type="text" name="task" [(ngModel)]="newTodo.task">
+    <button class="btn btn-primary" (click)="addTodo(newTodo)">Add Todo</button>
+  </form>
+  Show Completed: <input type="checkbox" [(ngModel)]="showComplete">
+</div> -->
+
+
+<div id="newContent" *ngIf="newContent">
+  <form>
+    <label for="name">Name</label>
+    <input type="text" name="name" [(ngModel)]="newContent.name"> <br>
+    <label for="description">Description</label>
+    <input type="text" name="description" [(ngModel)]="newContent.description"> <br>
+    <label for="description">Description</label>
+    <input type="text" name="description" [(ngModel)]="newContent.description"> <br>
+    <button (click)="addContent(newContent)">Create</button>
+  </form>
+</div>
+
+
+
+
+<!-- <div id="todoDetail" *ngIf="selected && ! editTodo">
+  <h4>ID: {{selected.id}}</h4>
+  <p>{{selected.task}}</p>
+  <p>Completed? {{selected.completed}}</p>
+  <p>Complete Date: {{selected.completeDate}}</p>
+  <p>Description: <br>
+    {{selected.description}}
+  </p>
+  <button class="btn btn-outline-danger" (click)="displayTable()">Back</button>
+      <button (click)="editTodo = null">Cancel</button>
+
+  <button class="btn btn-outline-primary" (click)="setEditTodo()">Edit</button>
+</div> -->
+
