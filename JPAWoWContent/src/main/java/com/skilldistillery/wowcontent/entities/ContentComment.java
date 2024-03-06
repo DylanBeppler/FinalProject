@@ -3,8 +3,6 @@ package com.skilldistillery.wowcontent.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,42 +18,28 @@ public class ContentComment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name="comment_date")
+	@Column(name = "comment_date")
 	private LocalDateTime commentDate;
 	private String message;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
-	
-//	@ManyToOne
-//    @JoinColumn(name = "content_id")
-//	private Content content;
-	@Column(name="reply_to_id")
+
+	@ManyToOne
+    @JoinColumn(name = "content_id")
+	private Content content;
+	@Column(name = "reply_to_id")
 	private int replyToId;
 	private boolean enabled;
-	@Column(name="image_url")
+	@Column(name = "image_url")
 	private String imageUrl;
-	@Column(name="updated_date")
+	@Column(name = "updated_date")
 	private LocalDateTime updatedDate;
 
 	public ContentComment() {
 		super();
 	}
-
-//	public ContentComment(int id, LocalDateTime commentDate, String message, User user, Content content, int replyTo,
-//			boolean enabled, String imageUrl, LocalDateTime updatedDate) {
-//		super();
-//		this.id = id;
-//		this.commentDate = commentDate;
-//		this.message = message;
-//		this.user = user;
-//		this.content = content;
-//		this.replyTo = replyTo;
-//		this.enabled = enabled;
-//		this.imageUrl = imageUrl;
-//		this.updatedDate = updatedDate;
-//	}
 
 	public int getId() {
 		return id;
@@ -80,7 +64,6 @@ public class ContentComment {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
 
 	public int getReplyToId() {
 		return replyToId;
@@ -122,13 +105,13 @@ public class ContentComment {
 		this.user = user;
 	}
 
-//	public Content getContent() {
-//		return content;
-//	}
-//
-//	public void setContent(Content content) {
-//		this.content = content;
-//	}
+	public Content getContent() {
+		return content;
+	}
+
+	public void setContent(Content content) {
+		this.content = content;
+	}
 
 	@Override
 	public int hashCode() {
@@ -147,14 +130,11 @@ public class ContentComment {
 		return id == other.id;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "contentComment [id=" + id + ", commentDate=" + commentDate + ", message=" + message + ", user=" + user
-//				+ ", content=" + content + ", replyTo=" + replyTo + ", enabled=" + enabled + ", imageUrl=" + imageUrl
-//				+ ", updatedDate=" + updatedDate + "]";
-//	}
+	@Override
+	public String toString() {
+		return "contentComment [id=" + id + ", commentDate=" + commentDate + ", message=" + message + ", user=" + user
+				+ ", content=" + content + ", replyTo=" + replyToId + ", enabled=" + enabled + ", imageUrl=" + imageUrl
+				+ ", updatedDate=" + updatedDate + "]";
+	}
 
-
-
-	
 }
