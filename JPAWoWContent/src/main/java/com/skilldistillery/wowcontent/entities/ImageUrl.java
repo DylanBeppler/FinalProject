@@ -3,8 +3,6 @@ package com.skilldistillery.wowcontent.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,25 +25,13 @@ public class ImageUrl {
 	@Column(name = "update_date")
 	private LocalDateTime updateDate;
 	private boolean enabled;
-//	@ManyToOne
-//	@JoinColumn(name = "content_id")
-//	private Content content;
-	
+	@ManyToOne
+	@JoinColumn(name = "content_id")
+	private Content content;
+
 	public ImageUrl() {
 		super();
 	}
-
-//	public ImageUrl(int id, String url, String caption, LocalDateTime createdDate, LocalDateTime updateDate,
-//			boolean enabled, Content content) {
-//		super();
-//		this.id = id;
-//		this.url = url;
-//		this.caption = caption;
-//		this.createdDate = createdDate;
-//		this.updateDate = updateDate;
-//		this.enabled = enabled;
-//		this.content = content;
-//	}
 
 	public int getId() {
 		return id;
@@ -95,13 +81,13 @@ public class ImageUrl {
 		this.enabled = enabled;
 	}
 
-//	public Content getContent() {
-//		return content;
-//	}
-//
-//	public void setContent(Content content) {
-//		this.content = content;
-//	}
+	public Content getContent() {
+		return content;
+	}
+
+	public void setContent(Content content) {
+		this.content = content;
+	}
 
 	@Override
 	public int hashCode() {
@@ -120,10 +106,10 @@ public class ImageUrl {
 		return id == other.id;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "imageUrl [id=" + id + ", url=" + url + ", caption=" + caption + ", createdDate=" + createdDate
-//				+ ", updateDate=" + updateDate + ", enabled=" + enabled + ", content=" + content + "]";
-//	}
+	@Override
+	public String toString() {
+		return "imageUrl [id=" + id + ", url=" + url + ", caption=" + caption + ", createdDate=" + createdDate
+				+ ", updateDate=" + updateDate + ", enabled=" + enabled + ", content=" + content + "]";
+	}
 
 }

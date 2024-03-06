@@ -2,6 +2,9 @@ package com.skilldistillery.wowcontent.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -48,9 +51,12 @@ class ContentCategoryTest {
 		
 	}
 	
-//	@Test
-//	void test_User_Has_Quests() {
-//		assertNotNull(user);
-//		assertTrue(user.getQuests().size() > 0);	
-//	}
+	@Test
+	void test_User_Has_Content() {
+		List<Content> content = contentCategory.getContent();
+		assertNotNull(content);
+		assertTrue(content.size() > 0);	
+	}
+	
+	
 }

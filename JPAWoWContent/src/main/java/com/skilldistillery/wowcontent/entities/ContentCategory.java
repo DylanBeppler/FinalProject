@@ -28,10 +28,10 @@ public class ContentCategory {
 	
 	@Column(name = "image_url")
 	private String imageUrl;
-//	
-//	@JsonIgnore
-//	@OneToMany(mappedBy = "ContentCategory")
-//	private List<Content> content;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "contentCategory")
+	private List<Content> content;
 
 	public int getId() {
 		return id;
@@ -65,13 +65,13 @@ public class ContentCategory {
 		this.imageUrl = imageUrl;
 	}
 
-//	public List<Content> getContent() {
-//		return content;
-//	}
-//
-//	public void setContent(List<Content> content) {
-//		this.content = content;
-//	}
+	public List<Content> getContent() {
+		return content;
+	}
+
+	public void setContent(List<Content> content) {
+		this.content = content;
+	}
 
 	@Override
 	public int hashCode() {
@@ -90,11 +90,11 @@ public class ContentCategory {
 		return id == other.id;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "ContentCategory [id=" + id + ", name=" + name + ", description=" + description + ", imageUrl="
-//				+ imageUrl + ", content=" + content + "]";
-//	}
+	@Override
+	public String toString() {
+		return "ContentCategory [id=" + id + ", name=" + name + ", description=" + description + ", imageUrl="
+				+ imageUrl + ", content=" + content + "]";
+	}
 	
 
 }

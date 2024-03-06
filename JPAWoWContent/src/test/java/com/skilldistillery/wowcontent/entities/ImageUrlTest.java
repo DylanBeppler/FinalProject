@@ -47,9 +47,11 @@ class ImageUrlTest {
 		
 	}
 	
-//	@Test
-//	void test_ImageUrl_Has_Quests() {
-//		assertNotNull(imageUrl);
-//		assertTrue(imageUrl.getQuests().size() > 0);	
-//	}
+	@Test
+	void test_ImageUrl_Has_Content() {
+		Content content = imageUrl.getContent();
+		assertNotNull(content);
+		assertTrue(content.getName().equals("mount"));	
+	}
+	
 }

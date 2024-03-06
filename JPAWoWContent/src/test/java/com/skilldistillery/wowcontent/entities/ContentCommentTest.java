@@ -41,15 +41,24 @@ class ContentCommentTest {
 	}
 
 	@Test
-	void test_ContentComment_Has_ContentCommentname() {
+	void test_ContentComment_Has_basic_mappings() {
 		assertNotNull(contentComment);
 		assertEquals("test", contentComment.getMessage());
 		
 	}
 	
-//	@Test
-//	void test_ContentComment_Has_Quests() {
-//		assertNotNull(contentComment);
-//		assertTrue(contentComment.getQuests().size() > 0);	
-//	}
+	@Test
+	void test_ContentComment_has_User() {
+		User user = contentComment.getUser();
+		assertNotNull(user);
+		assertEquals("blake", user.getUsername());
+	}
+	
+	@Test
+	void test_ContentComment_has_Content() {
+		Content content = contentComment.getContent();
+		assertNotNull(content);
+		assertEquals("mount", content.getName());
+	}
+	
 }

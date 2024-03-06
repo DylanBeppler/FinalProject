@@ -32,7 +32,6 @@ public class User {
 	private String role;
 	private String battletag;
 
-
 	@Column(name = "about_me")
 	private String aboutMe;
 
@@ -46,18 +45,18 @@ public class User {
 	@CreationTimestamp
 	@Column(name = "join_date")
 	private LocalDateTime joinDate;
-//
-//	@JsonIgnore
-//	@OneToMany(mappedBy = "user")
-//	private List<Content> userContent;
-//
-//	@JsonIgnore
-//	@OneToMany(mappedBy = "user")
-//	private List<Comment> userComments;
-//
-//	@JsonIgnore
-//	@OneToMany(mappedBy = "user")
-//	private List<ContentVote> contentVotes;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	private List<Content> userContent;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	private List<ContentComment> userComments;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	private List<ContentVote> contentVotes;
 
 	public int getId() {
 		return id;
@@ -147,29 +146,29 @@ public class User {
 		this.battletag = battletag;
 	}
 
-//	public List<Content> getUserContent() {
-//		return userContent;
-//	}
-//
-//	public void setUserContent(List<Content> userContent) {
-//		this.userContent = userContent;
-//	}
-//
-//	public List<Comment> getUserComments() {
-//		return userComments;
-//	}
-//
-//	public void setUserComments(List<Comment> userComments) {
-//		this.userComments = userComments;
-//	}
-//
-//	public List<ContentVote> getContentVotes() {
-//		return contentVotes;
-//	}
-//
-//	public void setContentVotes(List<ContentVote> contentVotes) {
-//		this.contentVotes = contentVotes;
-//	}
+	public List<Content> getUserContent() {
+		return userContent;
+	}
+
+	public void setUserContent(List<Content> userContent) {
+		this.userContent = userContent;
+	}
+
+	public List<ContentComment> getUserComments() {
+		return userComments;
+	}
+
+	public void setUserComments(List<ContentComment> userComments) {
+		this.userComments = userComments;
+	}
+
+	public List<ContentVote> getContentVotes() {
+		return contentVotes;
+	}
+
+	public void setContentVotes(List<ContentVote> contentVotes) {
+		this.contentVotes = contentVotes;
+	}
 
 	@Override
 	public int hashCode() {
@@ -187,7 +186,7 @@ public class User {
 		User other = (User) obj;
 		return id == other.id;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
