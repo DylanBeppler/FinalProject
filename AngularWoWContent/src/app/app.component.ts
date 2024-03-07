@@ -1,33 +1,41 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
+import { HomeComponent } from "./components/home/home.component";
+import { FormsModule } from '@angular/forms';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
+    imports: [
+      RouterOutlet,
+       HomeComponent,
+      FormsModule,
+      NavigationComponent
+      ]
 })
 export class AppComponent {
   constructor(
-    private auth: AuthService
+
   ) {}
 
-  ngOnInit() {
-    this.tempTestDeleteMeLater(); // DELETE LATER!!!
-  }
+  // ngOnInit() {
+  //   this.tempTestDeleteMeLater(); // DELETE LATER!!!
+  // }
 
-  tempTestDeleteMeLater() {
-    this.auth.login('zach','test').subscribe({ // change username to match DB
-      next: (data) => {
-        console.log('Logged in:');
-        console.log(data);
-      },
-      error: (fail) => {
-        console.error('Error authenticating:')
-        console.error(fail);
-      }
-    });
-  }
+  // tempTestDeleteMeLater() {
+  //   this.auth.login('zach','test').subscribe({ // change username to match DB
+  //     next: (data) => {
+  //       console.log('Logged in:');
+  //       console.log(data);
+  //     },
+  //     error: (fail) => {
+  //       console.error('Error authenticating:')
+  //       console.error(fail);
+  //     }
+  //   });
+  // }
 }
