@@ -224,9 +224,27 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `wowcontentdb`;
-INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (1, 'Quest', 'test', 'test');
-INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (2, 'Mount', 'test', 'test');
-INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (3, 'Boss', 'test', 'test');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (1, 'Quests', '', 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/63ee7afd388fe3520cb02fee0f8b58a51f00b0bf.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (2, 'Mounts', '', 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/7de44c39332154e58370af227f95c155756b7286.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (3, 'Bosses', '', 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/7de44c39332154e58370af227f95c155756b7286.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (4, 'Lore', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/39a0034512f6fbb16e490230efd967b1a1acc419.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (5, 'Weapons', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/17918ffe1591a61cc2539b8dfedc0d237eee424c.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (6, 'Armour', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/220a7009100920c2c60aa5e0a40ecef84c9519ec.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (7, 'Maps', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/d2ee0bfd0246a33ae9d21d8efde7bffa62acc19f.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (8, 'Raids', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/c1d985cd6bd161dff6bf57efa884044cc300bc18.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (9, 'World Content', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/d2ee0bfd0246a33ae9d21d8efde7bffa62acc19f.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (10, 'Pets', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/9176d7d24ad4ca88ac253d00178d7d3934ffddf5.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (11, 'Classes', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/f734c67ef0107959d7283bd5b4616ac90fab6c8e.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (12, 'Races', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/7b1055295ce3be6b346a54c4ffc35dacd7a19ac4.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (13, 'Talents', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/f734c67ef0107959d7283bd5b4616ac90fab6c8e.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (14, 'Battlegrounds', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/17918ffe1591a61cc2539b8dfedc0d237eee424c.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (15, 'PvP Arenas', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/17918ffe1591a61cc2539b8dfedc0d237eee424c.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (16, 'NPCs', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/39a0034512f6fbb16e490230efd967b1a1acc419.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (17, 'Dungeons', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/c1d985cd6bd161dff6bf57efa884044cc300bc18.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (18, 'Enemies', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/17918ffe1591a61cc2539b8dfedc0d237eee424c.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (19, 'Professions', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/011314afd12d685b507d463b256e13277e5511fc.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (20, 'Other', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/561423e9a5ffc89fd1a6f61ae4afe623104a17d4.png');
+INSERT INTO `content_category` (`id`, `name`, `description`, `image_url`) VALUES (21, 'Bugs', NULL, 'https://assets-wowusen-blz-prod-us.s3.dualstack.us-west-2.amazonaws.com/original/1X/c36047da3a5849e44de9160a102c554099003b40.png');
 
 COMMIT;
 
