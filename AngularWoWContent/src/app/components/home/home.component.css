@@ -76,6 +76,7 @@ body {
   .category-box {
     flex: 0 0 calc(50% - 20px);
     min-width: 250px; /* Minimum width of each category box */
+   max-width: 450px;
     background-color: #1a1a1a; /* Slightly darker boxes for contrast */
     padding: 20px;
     border-radius: 8px; /* Rounded corners */
@@ -102,6 +103,12 @@ body {
     color: #c9a941; /* Adjust link color as needed */
     text-decoration: none; /* Remove underline */
     /* Style for icons could be added here */
+  }
+
+  .category-link {
+    display: block; /* This will ensure the anchor tag behaves like a block-level element */
+    text-decoration: none; /* This will remove the underline from the link */
+    color: inherit; /* This ensures that the link color is the same as your text color */
   }
 
   .category-box a:hover {

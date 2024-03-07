@@ -20,21 +20,18 @@
 
 <div class="content">
   <div class="categories-container">
-    <!-- Iterate over each category -->
-    <div class="category-box rounded-corners img-hover-effect" *ngFor="let category of allContentCategories">
-      <h2>{{ category.name }}</h2>
-      <ul>
-        <li>
-
+    <div *ngFor="let category of allContentCategories">
+      <a [routerLink]="['/content', category.name]" class="category-link">
+        <div class="category-box rounded-corners img-hover-effect">
+          <h2>{{ category.name }}</h2>
           <img src="{{ category.imageUrl }}" class="rounded-corners img-hover-effect" alt="{{ category.name }}">
-
           <p>{{ category.description }}</p>
-        </li>
-        <!-- ... other links if necessary ... -->
-      </ul>
+        </div>
+      </a>
     </div>
   </div>
 </div>
+
 
 
 
