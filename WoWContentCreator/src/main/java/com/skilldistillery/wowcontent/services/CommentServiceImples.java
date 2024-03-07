@@ -14,7 +14,6 @@ import com.skilldistillery.wowcontent.repositories.CommentRepository;
 import com.skilldistillery.wowcontent.repositories.ContentRepository;
 import com.skilldistillery.wowcontent.repositories.UserRepository;
 
-
 @Service
 public class CommentServiceImples implements CommentService {
 
@@ -24,8 +23,7 @@ public class CommentServiceImples implements CommentService {
 	private UserRepository userRepo;
 	@Autowired
 	private ContentRepository contentRepo;
-	
-	
+
 	@Override
 	public List<ContentComment> index() {
 		return commentRepo.findAll();
@@ -34,6 +32,31 @@ public class CommentServiceImples implements CommentService {
 	@Override
 	public List<ContentComment> showAllUserComments(String userName) {
 		return commentRepo.findByUser_Username(userName);
+	}
+
+	@Override
+	public List<ContentComment> showCommentsByContentId(int contentId) {
+		Optional<Content> contentOpt = contentRepo.findById(contentId);
+		if (contentOpt.isPresent()) {
+			return contentOpt.get().getContentComments();
+		}
+		return null;
+	}
+
+	@Override
+	public ContentComment showCommentByCommentId(int contentId, int commentId) {
+		Optional<Content> contentOpt = contentRepo.findById(contentId);
+		if (contentOpt.isPresent()) {
+			List<ContentComment> contentComments = contentOpt.get().getContentComments();
+			Optional<ContentComment> commentOpt = commentRepo.findById(commentId);
+			if (commentOpt.isPresent()) {
+				ContentComment comment = commentOpt.get();
+				if (contentComments.contains(comment)) {
+					return comment;
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -55,10 +78,15 @@ public class CommentServiceImples implements CommentService {
 	@Override
 	public ContentComment update(String userName, int commentId, int contentId, ContentComment contentComment) {
 		User user = userRepo.findByUsername(userName);
+		Content content = null;
 		ContentComment managedComment = commentRepo.findByUser_UsernameAndId(userName, commentId);
-		if(managedComment != null) {
+		Optional<Content> contentOpt = contentRepo.findById(contentId);
+		if (contentOpt.isPresent()) {
+			content = contentOpt.get();
+		}
+		if (managedComment != null) {
 			managedComment.setUser(user);
-			managedComment.setContent(contentComment.getContent());
+			managedComment.setContent(content);
 			managedComment.setReplyToId(contentComment.getReplyToId());
 			managedComment.setMessage(contentComment.getMessage());
 			managedComment.setCommentDate(contentComment.getCommentDate());
@@ -73,20 +101,12 @@ public class CommentServiceImples implements CommentService {
 	@Override
 	public boolean destroy(String userName, int contentId, int commentId) {
 		boolean isDeleted = false;
-		if (commentRepo.existsByUser_UsernameAndId(userName, commentId) && contentRepo.existsByUser_UsernameAndId(userName, contentId)) {
+		if (commentRepo.existsByUser_UsernameAndId(userName, commentId)
+				&& contentRepo.existsByUser_UsernameAndId(userName, contentId)) {
 			commentRepo.deleteById(commentId);
 			isDeleted = true;
 		}
 		return isDeleted;
-	}
-
-	@Override
-	public List <ContentComment> showCommentsByContentId(int contentId) {
-		Optional<Content>contentOpt = contentRepo.findById(contentId);
-		if(contentOpt.isPresent()) {
-			return contentOpt.get().getContentComments();
-		}
-		return null;
 	}
 
 }
