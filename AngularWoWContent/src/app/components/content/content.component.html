@@ -4,25 +4,25 @@
       <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Description</th>
         <th>Category</th>
+        <th></th>
         <th></th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let content of allContent" (click)="selectedContent = content;">
+      <tr *ngFor="let content of allContent | contentCategory:categoryName" >
         <td>{{content.id}}</td>
         <td>{{content.name}}</td>
-        <td>{{content.description}}</td>
         <td>{{content.contentCategory.name}}</td>
-        <td><button class="btn btn-primary" (click)="editContent = content">Edit Content</button></td>
-        <td><button class="btn btn-danger" (click)="deleteContent(content.id)">Delete Content</button></td>
+        <td><button class="btn btn-primary" (click)="selectedContent = content;">Content Details</button></td>
+        <td><button class="btn btn-primary" *ngIf="loggedInUser && content.user.id === loggedInUser.id" (click)="editContent = content">Edit Content</button></td>
+        <td><button class="btn btn-danger" *ngIf="loggedInUser && content.user.id === loggedInUser.id" (click)="deleteContent(content.id)">Delete Content</button></td>
       </tr>
     </tbody>
   </table>
 
-  <div id="newContent">
+  <div id="newContent" *ngIf="!editContent && isLoggedIn()">
     <form class="row g-3">
       <div class="col-md-6">
         <label for="name">Title</label>
