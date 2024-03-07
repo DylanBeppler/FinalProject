@@ -104,7 +104,6 @@ export class ContentComponent implements OnInit {
   }
 
   updateContent(content: Content, goToDetail = true) {
-    console.log(content);
     this.contentService.update(content).subscribe({
       next: (content) => {
         this.editContent = null;

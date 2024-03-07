@@ -1,4 +1,5 @@
 import { ContentCategory } from "./content-category";
+import { User } from "./user";
 
 export class Content {
   id: number;
@@ -7,8 +8,9 @@ export class Content {
   imageUrl: string;
   enabled: boolean;
   createdDate: string;
-  updateDate: string | null;
+  lastUpdate: string | null;
   contentCategory: ContentCategory;
+  user: User;
 
   constructor(
     id: number = 0,
@@ -17,8 +19,9 @@ export class Content {
     imageUrl: string = '',
     enabled: boolean = false,
     createdDate: string = '',
-    updateDate: string = '',
-    contentCategory: ContentCategory = new ContentCategory()
+    lastUpdate: string = '',
+    contentCategory: ContentCategory = new ContentCategory(),
+    user: User = new User()
   ) {
     this.id = id;
     this.name = name;
@@ -26,8 +29,8 @@ export class Content {
     this.imageUrl = imageUrl;
     this.enabled = enabled;
     this.createdDate = createdDate;
-    this.updateDate = updateDate;
+    this.lastUpdate = lastUpdate;
     this.contentCategory = contentCategory;
-
+    this.user = user;
   }
 }
