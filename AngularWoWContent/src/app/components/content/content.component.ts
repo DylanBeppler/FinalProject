@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Content } from '../../models/content';
 import { ContentService } from '../../services/content.service';
 import { ContentCategory } from '../../models/content-category';
 import { ContentCategoryService } from '../../services/content-category.service';
 import { CommentService } from '../../services/comment.service';
+import { ContentCategoryPipe } from '../../pipes/content-category.pipe';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ContentCategoryPipe],
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css']
 })
@@ -26,17 +29,23 @@ export class ContentComponent implements OnInit {
   selectedContent: Content | null = null;
   allContent: Content[] = [];
   allContentCategories: ContentCategory[] = [];
+  categoryName: string = "";
+
+  loggedInUser: User | null = null;
 
   constructor(
     private commentService: CommentService,
     private contentService: ContentService,
     private contentCategoryService: ContentCategoryService,
     private activateRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
     this.reload();
+    this.setLoggedInUser();
     this.activateRoute.paramMap.subscribe({
       next: (params) => {
         let contentIdStr = params.get('contentId');
@@ -54,6 +63,32 @@ export class ContentComponent implements OnInit {
         console.error(kaboom);
       },
     });
+    this.activatedRoute.paramMap.subscribe({
+      next: (params: ParamMap) => {
+        let contentCategoryParam = params.get("name");
+        if (contentCategoryParam) {
+          this.categoryName = contentCategoryParam;
+        }
+      },
+    });
+  }
+
+  isLoggedIn(): boolean {
+    return this.auth.checkLogin();
+  }
+
+  setLoggedInUser(): void {
+    if (this.isLoggedIn()) {
+      this.auth.getLoggedInUser().subscribe({
+        next: (user) => {
+          this.loggedInUser = user;
+        },
+        error: (problem) => {
+          console.error('ContentComponent.setLoggedInUser(): error setting logged in user: ');
+          console.error(problem);
+        },
+      });
+    }
   }
 
   reload(): void {
@@ -145,7 +180,7 @@ export class ContentComponent implements OnInit {
         this.reload();
       },
       error: (kaboom: any) => {
-        console.error('Error updating Todo');
+        console.error('Error updating Content');
         console.error(kaboom);
       },
     });
@@ -232,3 +267,4 @@ export class ContentComponent implements OnInit {
     });
   }
 }
+

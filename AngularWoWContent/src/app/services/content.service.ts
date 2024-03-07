@@ -75,11 +75,6 @@ export class ContentService {
   }
 
   update(editContent: Content): Observable<Content> {
-    if (editContent.lastUpdate) {
-      editContent.lastUpdate = this.datePipe.transform(Date.now(), 'shortDate'); //  7/23/23
-    } else {
-      editContent.lastUpdate = '';
-    }
     return this.http
       .put<Content>(
         this.url + '/' + editContent.id,
