@@ -93,7 +93,7 @@ export class ContentComponent implements OnInit {
     });
   }
 
-  addContent(newContent: Content) {
+  crete(newContent: Content) {
     this.contentService.create(newContent).subscribe({
       next: (newContent) => {
         this.newContent = new Content();
