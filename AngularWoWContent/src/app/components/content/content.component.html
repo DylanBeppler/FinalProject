@@ -14,7 +14,7 @@
         <td>{{content.id}}</td>
         <td>{{content.name}}</td>
         <td>{{content.description}}</td>
-        <td>{{content.category}}</td>
+        <td>{{content.contentCategory}}</td>
         <td>{{content.imageUrl}}</td>
         <td>{{content.createdDate}}</td>
         <td>{{content.updateDate}}</td>
@@ -22,7 +22,7 @@
     </tbody>
   </table>
 
-  <div id="newContent" *ngIf="newContent">
+  <div id="newContent">
     <form>
       <div class="form-group">
         <label for="name">Title</label>
@@ -34,8 +34,8 @@
       </div>
       <div class="form-group">
         <label for="category">Category</label>
-        <select class="form-control" name="category">
-          <option *ngFor="let category of allContentCategories">{{category.name}} -- {{category.description}}</option>
+        <select class="form-control" name="category" [(ngModel)]="newContent.contentCategory.id">
+          <option *ngFor="let category of allContentCategories" name="category" value="{{category.id}}">{{category.name}}</option>
         </select>
       </div>
       <div class="form-group">
