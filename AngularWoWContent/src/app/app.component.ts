@@ -22,7 +22,6 @@ import { ContentComponent } from './components/content/content.component';
 })
 export class AppComponent {
   constructor(
-
   ) {}
 
   // ngOnInit() {
