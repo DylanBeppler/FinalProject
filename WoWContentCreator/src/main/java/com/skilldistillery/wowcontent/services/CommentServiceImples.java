@@ -71,9 +71,9 @@ public class CommentServiceImples implements CommentService {
 	}
 
 	@Override
-	public boolean destroy(String userName, int commentId) {
+	public boolean destroy(String userName, int contentId, int commentId) {
 		boolean isDeleted = false;
-		if (commentRepo.existsByUser_UsernameAndId(userName, commentId)) {
+		if (commentRepo.existsByUser_UsernameAndId(userName, commentId) && contentRepo.existsByUser_UsernameAndId(userName, contentId)) {
 			commentRepo.deleteById(commentId);
 			isDeleted = true;
 		}

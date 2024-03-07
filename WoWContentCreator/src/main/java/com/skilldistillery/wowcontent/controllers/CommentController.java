@@ -70,24 +70,24 @@ public class CommentController {
 		return contentComment;
 	}
 	
-//	@PutMapping("content/{contentId}/comments/{commentId}")
-//	public ContentComment updateComment(Principal principal, @RequestBody ContentComment contentComment, @PathVariable("contentId") int contentId, @PathVariable("commentId") int commentId, HttpServletResponse resp) {
-//		try {
-//			contentComment = contentService.update(principal.getName(), contentId, commentId, contentComment);
-//			if (contentComment != null) {
-//				resp.setStatus(201);
-//			}
-//		} catch (Exception e) {
-//			resp.setStatus(400);
-//			e.printStackTrace();
-//			contentComment = null;
-//		}
-//		return contentComment;
-//	}	
-	@DeleteMapping("content/{contentId}")
-	public void destroy(Principal principal, @PathVariable("contentId") int contentId, HttpServletResponse resp) {
+	@PutMapping("content/{contentId}/comments/{commentId}")
+	public ContentComment updateComment(Principal principal, @RequestBody ContentComment contentComment, @PathVariable("contentId") int contentId, @PathVariable("commentId") int commentId, HttpServletResponse resp) {
 		try {
-			boolean success = contentService.destroy(principal.getName(), contentId);
+			contentComment = commService.update(principal.getName(), contentId, commentId, contentComment);
+			if (contentComment != null) {
+				resp.setStatus(201);
+			}
+		} catch (Exception e) {
+			resp.setStatus(400);
+			e.printStackTrace();
+			contentComment = null;
+		}
+		return contentComment;
+	}	
+	@DeleteMapping("content/{contentId}/comments/{commentId}")
+	public void destroy(Principal principal, @PathVariable("contentId") int contentId, @PathVariable("commentId") int commentId, HttpServletResponse resp) {
+		try {
+			boolean success = commService.destroy(principal.getName(), contentId, commentId);
 			if (success) {
 				resp.setStatus(204);
 			} else {
