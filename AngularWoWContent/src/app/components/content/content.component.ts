@@ -13,7 +13,7 @@ import { CommentService } from '../../services/comment.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './content.component.html',
-  styleUrls: ['./content.component.css'],
+  styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
   editComment: Comment | null = null;
