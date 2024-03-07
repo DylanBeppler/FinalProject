@@ -44,9 +44,20 @@ public class CommentController {
 	}
 	
 	@GetMapping("content/{contentId}/comments")
-	public List <ContentComment> showCommentByContentId(@PathVariable("contentId") int contentId, HttpServletResponse resp) {
+	public List <ContentComment> showCommentsByContentId(@PathVariable("contentId") int contentId, HttpServletResponse resp) {
 		Content content = contentService.showContentById(contentId);
 		List <ContentComment> contentComment  = commService.showCommentsByContentId(content.getId());
+		if (contentComment != null) {
+			return contentComment;
+		}
+		resp.setStatus(404);
+		return null;
+	}
+	
+	@GetMapping("content/{contentId}/comments/{commentId}")
+	public ContentComment showCommentByCommentId(@PathVariable("contentId") int contentId, @PathVariable("commentId") int commentId, HttpServletResponse resp) {
+//		Content content = contentService.showContentById(contentId);
+		ContentComment contentComment  = commService.showCommentByCommentId(contentId, commentId);
 		if (contentComment != null) {
 			return contentComment;
 		}
@@ -70,24 +81,25 @@ public class CommentController {
 		return contentComment;
 	}
 	
-//	@PutMapping("content/{contentId}/comments/{commentId}")
-//	public ContentComment updateComment(Principal principal, @RequestBody ContentComment contentComment, @PathVariable("contentId") int contentId, @PathVariable("commentId") int commentId, HttpServletResponse resp) {
-//		try {
-//			contentComment = contentService.update(principal.getName(), contentId, commentId, contentComment);
-//			if (contentComment != null) {
-//				resp.setStatus(201);
-//			}
-//		} catch (Exception e) {
-//			resp.setStatus(400);
-//			e.printStackTrace();
-//			contentComment = null;
-//		}
-//		return contentComment;
-//	}	
-	@DeleteMapping("content/{contentId}")
-	public void destroy(Principal principal, @PathVariable("contentId") int contentId, HttpServletResponse resp) {
+	@PutMapping("content/{contentId}/comments/{commentId}")
+	public ContentComment updateComment(Principal principal, @RequestBody ContentComment contentComment, @PathVariable("contentId") int contentId, @PathVariable("commentId") int commentId, HttpServletResponse resp) {
 		try {
-			boolean success = contentService.destroy(principal.getName(), contentId);
+			contentComment = commService.update(principal.getName(), contentId, commentId, contentComment);
+			if (contentComment != null) {
+				resp.setStatus(201);
+			}
+		} catch (Exception e) {
+			resp.setStatus(400);
+			e.printStackTrace();
+			contentComment = null;
+		}
+		return contentComment;
+	}	
+	
+	@DeleteMapping("content/{contentId}/comments/{commentId}")
+	public void destroy(Principal principal, @PathVariable("contentId") int contentId, @PathVariable("commentId") int commentId, HttpServletResponse resp) {
+		try {
+			boolean success = commService.destroy(principal.getName(), contentId, commentId);
 			if (success) {
 				resp.setStatus(204);
 			} else {
