@@ -1,3 +1,5 @@
+import { ContentCategory } from "./content-category";
+
 export class Content {
   id: number;
   name: string;
@@ -6,7 +8,7 @@ export class Content {
   enabled: boolean;
   createdDate: string;
   updateDate: string | null;
-  category: string;
+  contentCategory: ContentCategory;
 
   constructor(
     id: number = 0,
@@ -16,7 +18,7 @@ export class Content {
     enabled: boolean = false,
     createdDate: string = '',
     updateDate: string = '',
-    category: string= ''
+    contentCategory: ContentCategory = new ContentCategory()
   ) {
     this.id = id;
     this.name = name;
@@ -25,7 +27,7 @@ export class Content {
     this.enabled = enabled;
     this.createdDate = createdDate;
     this.updateDate = updateDate;
-    this.category = category;
+    this.contentCategory = contentCategory;
 
   }
 }
