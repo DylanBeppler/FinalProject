@@ -1,19 +1,19 @@
 <header class="navbar">
   <div class="container-fluid">
-    <a class="navbar-brand nav-text" routerLink="/home">Navbar</a>
+    <a class="navbar-brand nav-text" [routerLink]="['/home']">Navbar</a>
     <button class="navbar-toggler" type="button" (click)="toggleCollapse()" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div [ngbCollapse]="isCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link nav-text" routerLink="/home" routerLinkActive="active" aria-current="page">Home</a>
+          <a class="nav-link nav-text" [routerLink]="['/home']" routerLinkActive="active" aria-current="page">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-text" routerLink="/topcontent" routerLinkActive="active">Top Content</a>
+          <a class="nav-link nav-text" [routerLink]="['/topcontent']" routerLinkActive="active">Top Content</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-text" routerLink="/posts" routerLinkActive="active">Posts</a>
+          <a class="nav-link nav-text" [routerLink]="['/posts']" routerLinkActive="active">Posts</a>
         </li>
 
 
@@ -24,10 +24,10 @@
 
 
         <li *ngIf="!isLoggedIn" class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+          <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
         </li>
         <li *ngIf="!isLoggedIn" class="nav-item">
-          <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+          <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">Register</a>
         </li>
       </ul>
       <form class="d-flex" role="search">

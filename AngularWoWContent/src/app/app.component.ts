@@ -5,6 +5,9 @@ import { HomeComponent } from "./components/home/home.component";
 import { FormsModule } from '@angular/forms';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ContentComponent } from './components/content/content.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @Component({
     selector: 'app-root',
@@ -16,8 +19,12 @@ import { ContentComponent } from './components/content/content.component';
        HomeComponent,
       FormsModule,
       NavigationComponent,
-      ContentComponent
-      ]
+      ContentComponent,
+      LoginComponent,
+      LogoutComponent,
+      RegisterComponent
+
+    ]
 
 })
 export class AppComponent {
