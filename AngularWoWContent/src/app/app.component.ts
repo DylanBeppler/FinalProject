@@ -4,6 +4,7 @@ import { AuthService } from './services/auth.service';
 import { HomeComponent } from "./components/home/home.component";
 import { FormsModule } from '@angular/forms';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { ContentComponent } from './components/content/content.component';
 
 @Component({
     selector: 'app-root',
@@ -14,8 +15,10 @@ import { NavigationComponent } from './components/navigation/navigation.componen
       RouterOutlet,
        HomeComponent,
       FormsModule,
-      NavigationComponent
+      NavigationComponent,
+      ContentComponent
       ]
+
 })
 export class AppComponent {
   constructor(
