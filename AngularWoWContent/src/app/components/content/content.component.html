@@ -1,5 +1,5 @@
 <div class="container">
-  <table class="table table-striped table-hover table-dark" *ngIf="!selected">
+  <table class="table table-striped table-hover table-dark" *ngIf="!selectedContent">
     <thead class="table-dark">
       <tr>
         <th>ID</th>
@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let content of allContent" (click)="selected = content;">
+      <tr *ngFor="let content of allContent" (click)="selectedContent = content;">
         <td>{{content.id}}</td>
         <td>{{content.name}}</td>
         <td>{{content.description}}</td>
@@ -43,7 +43,7 @@
         <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newContent.imageUrl">
       </div>
       <br>
-      <button class="btn btn-primary" (click)="addContent(newContent)">Create</button>
+      <button class="btn btn-primary" (click)="createContent(newContent)">Create</button>
     </form>
   </div>
 
