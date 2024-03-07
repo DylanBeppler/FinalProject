@@ -6,22 +6,29 @@ import { Content } from '../../models/content';
 import { ContentService } from '../../services/content.service';
 import { ContentCategory } from '../../models/content-category';
 import { ContentCategoryService } from '../../services/content-category.service';
+import { CommentService } from '../../services/comment.service';
 
 @Component({
   selector: 'app-content',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './content.component.html',
-  styleUrls: ['./content.component.css'],
+  styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
+  editComment: Comment | null = null;
+  newComment: Comment = new Comment();
+  selectedComment: Comment | null = null;
+  allComments: Comment[] = [];
+
   editContent: Content | null = null;
   newContent: Content = new Content();
-  selected: Content | null = null;
+  selectedContent: Content | null = null;
   allContent: Content[] = [];
   allContentCategories: ContentCategory[] = [];
 
   constructor(
+    private commentService: CommentService,
     private contentService: ContentService,
     private contentCategoryService: ContentCategoryService,
     private activateRoute: ActivatedRoute,
@@ -64,28 +71,53 @@ export class ContentComponent implements OnInit {
         this.allContentCategories = contentCategories;
       },
       error: (problem) => {
-        console.error('ContentComponent.reload(): error loading all content categories: ');
+        console.error(
+          'ContentComponent.reload(): error loading all content categories: '
+        );
+        console.error(problem);
+      },
+    });
+    this.commentService.index().subscribe({
+      next: (allComments) => {
+        this.allComments = allComments;
+      },
+      error: (problem) => {
+        console.error(
+          'ContentComponent.reload(): error loading all comments: '
+        );
         console.error(problem);
       },
     });
   }
 
   displayContent(content: Content) {
-    this.selected = content;
+    this.selectedContent = content;
   }
 
-  displayTable() {
-    this.selected = null;
+  displayComment(comment: Comment) {
+    this.selectedComment = comment;
+  }
+
+  displayTableContent() {
+    this.selectedContent = null;
+  }
+
+  displayTableComment() {
+    this.selectedComment = null;
   }
 
   setEditContent() {
-    this.editContent = Object.assign({}, this.selected);
+    this.editContent = Object.assign({}, this.selectedContent);
+  }
+
+  setEditComment() {
+    this.editComment = Object.assign({}, this.selectedComment);
   }
 
   getContent(contentId: number) {
     this.contentService.show(contentId).subscribe({
       next: (content) => {
-        (this.selected = content), this.reload();
+        (this.selectedContent = content), this.reload();
       },
       error: () => {
         this.router.navigateByUrl('contentNotFound');
@@ -93,7 +125,7 @@ export class ContentComponent implements OnInit {
     });
   }
 
-  addContent(newContent: Content) {
+  createContent(newContent: Content) {
     this.contentService.create(newContent).subscribe({
       next: (newContent) => {
         this.newContent = new Content();
@@ -108,7 +140,7 @@ export class ContentComponent implements OnInit {
       next: (content) => {
         this.editContent = null;
         if (goToDetail) {
-          this.selected = content;
+          this.selectedContent = content;
         }
         this.reload();
       },
@@ -121,6 +153,78 @@ export class ContentComponent implements OnInit {
 
   deleteContent(contentId: number) {
     this.contentService.destroy(contentId).subscribe({
+      next: () => {
+        this.reload();
+      },
+      error: () => {},
+    });
+  }
+  getCommentsByContentId(contentId: number, commentId: number) {
+    this.commentService.commentsByContentId(contentId).subscribe({
+      next: (comment) => {
+        (this.allComments = comment), this.reload();
+      },
+      error: () => {
+        this.router.navigateByUrl('contentNotFound');
+      },
+    });
+  }
+
+  getCommentByCommentId(contentId: number, commentId: number) {
+    this.commentService.commentByCommentId(contentId, commentId).subscribe({
+      next: (comment) => {
+        (this.selectedComment = comment), this.reload();
+      },
+      error: () => {
+        this.router.navigateByUrl('contentNotFound');
+      },
+    });
+  }
+
+  getUserComments() {
+    this.commentService.userComments().subscribe({
+      next: (comment) => {
+        (this.selectedComment = comment), this.reload();
+      },
+      error: () => {
+        this.router.navigateByUrl('contentNotFound');
+      },
+    });
+  }
+
+  addComment(contentId: number, newComment: Comment) {
+    this.commentService.create(contentId, newComment).subscribe({
+      next: (newComment) => {
+        this.newComment = new Comment();
+        this.reload();
+      },
+      error: () => {},
+    });
+  }
+
+  updateComment(
+    contentId: number,
+    commentId: number,
+    comment: Comment,
+    goToDetail = true
+  ) {
+    this.commentService.update(contentId, commentId, comment).subscribe({
+      next: (comment) => {
+        this.editContent = null;
+        if (goToDetail) {
+          this.selectedComment = comment;
+        }
+        this.reload();
+      },
+      error: (kaboom: any) => {
+        console.error('Error updating comment');
+        console.error(kaboom);
+      },
+    });
+  }
+
+  deleteComment(contentId: number, commentId: number) {
+    this.commentService.destroy(contentId, commentId).subscribe({
       next: () => {
         this.reload();
       },
