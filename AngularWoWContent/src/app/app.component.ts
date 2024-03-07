@@ -29,7 +29,6 @@ import { RegisterComponent } from './components/register/register.component';
 })
 export class AppComponent {
   constructor(
-
   ) {}
 
   // ngOnInit() {
