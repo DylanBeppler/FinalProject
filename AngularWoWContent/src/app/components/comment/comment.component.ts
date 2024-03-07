@@ -1,119 +1,70 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CommentService } from '../../services/comment.service';
-import { ActivatedRoute, Router } from '@angular/router';
+// import { CommonModule } from '@angular/common';
+// import { Component, OnInit } from '@angular/core';
+// import { FormsModule } from '@angular/forms';
+// import { CommentService } from '../../services/comment.service';
+// import { ActivatedRoute, Router } from '@angular/router';
 
-@Component({
-  selector: 'app-comment',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './comment.component.html',
-  styleUrl: './comment.component.css',
-})
-export class CommentComponent implements OnInit{
-   newComment: Comment | null = null;
-  editComment: Comment | null = null;
-  newComment: Comment = new Comment();
-  selected: Comment | null = null;
-  allComments: Comment[] = [];
+// @Component({
+//   selector: 'app-comment',
+//   standalone: true,
+//   imports: [CommonModule, FormsModule],
+//   templateUrl: './comment.component.html',
+//   styleUrl: './comment.component.css',
+// })
+// export class CommentComponent implements OnInit{
 
-  constructor(
-    private commentService: CommentService,
-    private activateRoute: ActivatedRoute,
-    private router: Router
-  ) {}
 
-  ngOnInit(): void {
-    this.reload();
-    this.activateRoute.paramMap.subscribe({
-      next: (params) => {
-        let commentIdStr = params.get('commentId');
-        if (commentIdStr) {
-          let commentId = parseInt(commentIdStr);
-          if (isNaN(commentId)) {
-            this.router.navigateByUrl('commentId');
-          } else {
-            this.getComment(commentId);
-          }
-        }
-      },
-      error: (kaboom) => {
-        console.error('Error retreiving comment');
-        console.error(kaboom);
-      },
-    });
-  }
+//   constructor(
+//     private commentService: CommentService,
+//     private activateRoute: ActivatedRoute,
+//     private router: Router
+//   ) {}
 
-  reload(): void {
-    this.commentService.index().subscribe({
-      next: (comment) => {
-        this.allComments = comment;
-      },
-      error: (problem) => {
-        console.error('CommentComponent.reload(): error loading all comments: ');
-        console.error(problem);
-      },
-    });
-  }
+//   ngOnInit(): void {
+//     this.reload();
+//     this.activateRoute.paramMap.subscribe({
+//       next: (params) => {
+//         let commentIdStr = params.get('commentId');
+//         if (commentIdStr) {
+//           let commentId = parseInt(commentIdStr);
+//           if (isNaN(commentId)) {
+//             this.router.navigateByUrl('commentId');
+//           } else {
+//             this.getComment(commentId);
+//           }
+//         }
+//       },
+//       error: (kaboom) => {
+//         console.error('Error retreiving comment');
+//         console.error(kaboom);
+//       },
+//     });
+//   }
 
-  displayComment(comment: Comment) {
-    this.selected = comment;
-  }
+//   reload(): void {
+//     this.commentService.index().subscribe({
+//       next: (comment) => {
+//         this.allComments = comment;
+//       },
+//       error: (problem) => {
+//         console.error('CommentComponent.reload(): error loading all comments: ');
+//         console.error(problem);
+//       },
+//     });
+//   }
 
-  displayTable() {
-    this.selected = null;
-  }
+//   displayComment(comment: Comment) {
+//     this.selected = comment;
+//   }
 
-  setEditComment() {
-    this.editComment = Object.assign({}, this.selected);
-  }
+//   displayTable() {
+//     this.selected = null;
+//   }
 
-  getComment(commentId: number) {
-    this.commentService.(commentId).subscribe({
-      next: (content) => {
-        (this.selected = content), this.reload();
-      },
-      error: () => {
-        this.router.navigateByUrl('contentNotFound');
-      },
-    });
-  }
+//   setEditComment() {
+//     this.editComment = Object.assign({}, this.selected);
+//   }
 
-  addComment(newComment: Comment) {
-    this.commentService.createComment(newComment).subscribe({
-      next: (newComment) => {
-        this.newComment = new Comment();
-        this.reload();
-      },
-      error: () => {},
-    });
-  }
 
-  updateContent(content: Content, goToDetail = true) {
-    console.log(content);
-    this.contentService.update(content).subscribe({
-      next: (content) => {
-        this.editContent = null;
-        if (goToDetail) {
-          this.selected = content;
-        }
-        this.reload();
-      },
-      error: (kaboom: any) => {
-        console.error('Error updating Todo');
-        console.error(kaboom);
-      },
-    });
-  }
-
-  deleteContent(contentId: number) {
-    this.contentService.destroy(contentId).subscribe({
-      next: () => {
-        this.reload();
-      },
-      error: () => {},
-    });
-  }
-}
+// }
 
