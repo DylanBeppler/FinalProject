@@ -36,6 +36,8 @@ public class ContentServiceImpl implements ContentService {
 		User user = userRepo.findByUsername(userName);
 		if (user != null) {
 			content.setUser(user);
+			content.setCreatedDate(LocalDateTime.now());
+			content.setLastUpdate(LocalDateTime.now());
 			return contentRepo.saveAndFlush(content);
 		}
 		return null;

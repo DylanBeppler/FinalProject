@@ -65,4 +65,43 @@ body {
     color: white; /* White text for the main content */
   }
 
+  .categories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the space between boxes as needed */
+    background-color: #333; /* Dark background */
+  }
 
+  .category-box {
+    flex: 1;
+    min-width: 250px; /* Minimum width of each category box */
+    background-color: #1a1a1a; /* Slightly darker boxes for contrast */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    color: white; /* Text color */
+  }
+
+  .category-box h2 {
+    border-bottom: 1px solid #555; /* Subtle line under the title */
+    padding-bottom: 10px;
+    margin-bottom: 20px; /* Space between title and links */
+  }
+
+  .category-box ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+  }
+
+  .category-box li {
+    padding: 5px 0; /* Space between links */
+  }
+
+  .category-box a {
+    color: #c9a941; /* Adjust link color as needed */
+    text-decoration: none; /* Remove underline */
+    /* Style for icons could be added here */
+  }
+
+  .category-box a:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
