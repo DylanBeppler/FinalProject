@@ -44,9 +44,20 @@ public class CommentController {
 	}
 	
 	@GetMapping("content/{contentId}/comments")
-	public List <ContentComment> showCommentByContentId(@PathVariable("contentId") int contentId, HttpServletResponse resp) {
+	public List <ContentComment> showCommentsByContentId(@PathVariable("contentId") int contentId, HttpServletResponse resp) {
 		Content content = contentService.showContentById(contentId);
 		List <ContentComment> contentComment  = commService.showCommentsByContentId(content.getId());
+		if (contentComment != null) {
+			return contentComment;
+		}
+		resp.setStatus(404);
+		return null;
+	}
+	
+	@GetMapping("content/{contentId}/comments/{commentId}")
+	public ContentComment showCommentByCommentId(@PathVariable("contentId") int contentId, @PathVariable("commentId") int commentId, HttpServletResponse resp) {
+//		Content content = contentService.showContentById(contentId);
+		ContentComment contentComment  = commService.showCommentByCommentId(contentId, commentId);
 		if (contentComment != null) {
 			return contentComment;
 		}
@@ -84,6 +95,7 @@ public class CommentController {
 		}
 		return contentComment;
 	}	
+	
 	@DeleteMapping("content/{contentId}/comments/{commentId}")
 	public void destroy(Principal principal, @PathVariable("contentId") int contentId, @PathVariable("commentId") int commentId, HttpServletResponse resp) {
 		try {
