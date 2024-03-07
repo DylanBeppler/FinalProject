@@ -11,7 +11,7 @@
 
 
 <section class="banner">
-  <img src="https://i.ibb.co/WvNm6j8/Wo-W-Content-Creator-3-6-2024.png" id="banner-logo" alt="WoW Content Creator Logo" border="0">
+  <img src="https://i.ibb.co/WvNm6j8/Wo-W-Content-Creator-3-6-2024.png" id="banner-logo" alt="WoW Content Creator Logo">
 </section>
 
 <div class="forum-header">
@@ -20,36 +20,38 @@
 
 <div class="content">
   <div class="categories-container">
-    <div class="category-box">
-      <h2>Community</h2>
+    <!-- Iterate over each category -->
+    <div class="category-box rounded-corners img-hover-effect" *ngFor="let category of allContentCategories">
+      <h2>{{ category.name }}</h2>
       <ul>
-        <li><a href="/general-discussion">General Discussion</a></li>
-        <li><a href="/oceanic-general">Oceanic General Discussion</a></li>
-        <!-- ... other links ... -->
+        <li>
+
+          <img src="{{ category.imageUrl }}" class="rounded-corners img-hover-effect" alt="{{ category.name }}">
+
+          <p>{{ category.description }}</p>
+        </li>
+        <!-- ... other links if necessary ... -->
       </ul>
     </div>
-    <div class="category-box">
-      <h2>WoW Classic</h2>
-      <ul>
-        <li><a href="/wow-classic-general">WoW Classic General Discussion</a></li>
-        <!-- ... other links ... -->
-      </ul>
-    </div>
-    <!-- ... other category boxes ... -->
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

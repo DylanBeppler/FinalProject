@@ -70,15 +70,17 @@ body {
     flex-wrap: wrap;
     gap: 20px; /* Adjust the space between boxes as needed */
     background-color: #333; /* Dark background */
+    justify-content: space-between;
   }
 
   .category-box {
-    flex: 1;
+    flex: 0 0 calc(50% - 20px);
     min-width: 250px; /* Minimum width of each category box */
     background-color: #1a1a1a; /* Slightly darker boxes for contrast */
     padding: 20px;
     border-radius: 8px; /* Rounded corners */
     color: white; /* Text color */
+    box-sizing: border-box;
   }
 
   .category-box h2 {
@@ -104,4 +106,18 @@ body {
 
   .category-box a:hover {
     text-decoration: underline; /* Underline on hover */
+  }
+
+  .rounded-corners {
+    border-radius: 10px; /* Adjust the pixel value to increase or decrease the rounding */
+  }
+
+
+  .img-hover-effect {
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for the transform and shadow */
+  }
+
+  .img-hover-effect:hover {
+    transform: scale(1.01); /* Slightly increase the size */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* White glow around the image */
   }
