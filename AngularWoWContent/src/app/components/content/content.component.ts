@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Content } from '../../models/content';
 import { ContentService } from '../../services/content.service';
+import { ContentCategory } from '../../models/content-category';
+import { ContentCategoryService } from '../../services/content-category.service';
 
 @Component({
   selector: 'app-content',
@@ -13,6 +15,18 @@ import { ContentService } from '../../services/content.service';
   styleUrls: ['./content.component.css'],
 })
 export class ContentComponent implements OnInit {
+  editContent: Content | null = null;
+  newContent: Content = new Content();
+  selected: Content | null = null;
+  allContent: Content[] = [];
+  allContentCategories: ContentCategory[] = [];
+
+  constructor(
+    private contentService: ContentService,
+    private contentCategoryService: ContentCategoryService,
+    private activateRoute: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.reload();
@@ -35,12 +49,6 @@ export class ContentComponent implements OnInit {
     });
   }
 
-  constructor(
-    private contentService: ContentService,
-    private activateRoute: ActivatedRoute,
-    private router: Router
-  ) {}
-
   reload(): void {
     this.contentService.index().subscribe({
       next: (content) => {
@@ -51,12 +59,16 @@ export class ContentComponent implements OnInit {
         console.error(problem);
       },
     });
+    this.contentCategoryService.index().subscribe({
+      next: (contentCategories) => {
+        this.allContentCategories = contentCategories;
+      },
+      error: (problem) => {
+        console.error('ContentComponent.reload(): error loading all content categories: ');
+        console.error(problem);
+      },
+    });
   }
-
-  editContent: Content | null = null;
-  newContent: Content = new Content();
-  selected: Content | null = null;
-  allContent: Content[] = [];
 
   displayContent(content: Content) {
     this.selected = content;
