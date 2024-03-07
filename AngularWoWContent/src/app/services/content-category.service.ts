@@ -24,7 +24,7 @@ export class ContentCategoryService {
   }
 
   index(): Observable<ContentCategory[]> {
-    return this.http.get<ContentCategory[]>(this.url, this.getHttpOptions()).pipe(
+    return this.http.get<ContentCategory[]>(this.url).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

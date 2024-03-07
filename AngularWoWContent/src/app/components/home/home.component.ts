@@ -22,6 +22,11 @@ export class HomeComponent {
   allContentCategories: ContentCategory[] = [];
 
  ngOnInit(): void {
+  this.loadCategories();
+
+ }
+
+loadCategories() {
   this.contentCategoryService.index().subscribe({
     next: (contentCategories) => {
       this.allContentCategories = contentCategories;
@@ -31,8 +36,7 @@ export class HomeComponent {
       console.error(problem);
     },
   });
-
- }
+}
 
 
   constructor(
