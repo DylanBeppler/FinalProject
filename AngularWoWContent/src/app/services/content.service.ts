@@ -75,10 +75,10 @@ export class ContentService {
   }
 
   update(editContent: Content): Observable<Content> {
-    if (editContent.updateDate) {
-      editContent.updateDate = this.datePipe.transform(Date.now(), 'shortDate'); //  7/23/23
+    if (editContent.lastUpdate) {
+      editContent.lastUpdate = this.datePipe.transform(Date.now(), 'shortDate'); //  7/23/23
     } else {
-      editContent.updateDate = '';
+      editContent.lastUpdate = '';
     }
     return this.http
       .put<Content>(
