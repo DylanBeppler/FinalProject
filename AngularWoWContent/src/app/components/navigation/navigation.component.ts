@@ -52,5 +52,3 @@ export class NavigationComponent {
   return this.authService.checkLogin();
 }
 }
-
-

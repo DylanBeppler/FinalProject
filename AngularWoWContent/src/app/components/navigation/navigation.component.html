@@ -1,6 +1,6 @@
 <header class="navbar">
   <div class="container-fluid">
-    <a class="navbar-brand nav-text" [routerLink]="['/home']">Home</a>
+    <a class="navbar-brand nav-text nav-link" [routerLink]="['/home']">Home</a>
     <button class="navbar-toggler" type="button" (click)="toggleCollapse()" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -17,14 +17,14 @@
 
         <li *ngIf="isLoggedIn()" class="nav-item">
           <button class="btn btn-danger" (click)="logout()">Logout</button>
-        </li><br>
+        </li>
 
 
         <li *ngIf="!isLoggedIn()" class="nav-item">
-          <a class="nav-link" (click)="openLoginModal()" href="#">Login</a>
+          <a class="nav-link nav-text" (click)="openLoginModal()" href="#">Login</a>
         </li>
         <li *ngIf="!isLoggedIn()" class="nav-item">
-          <a class="nav-link" (click)="openRegisterModal()" href="#">Register</a>
+          <a class="nav-link nav-text" (click)="openRegisterModal()" href="#">Register</a>
         </li>
       </ul>
       <form class="d-flex" role="search">

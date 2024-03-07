@@ -8,3 +8,28 @@
 .nav-text {
   color: white;
 }
+
+.nav-link {
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for color and background */
+}
+
+.nav-link:hover, .nav-link:focus {
+  transform: scale(1.01); /* Slightly increase the size */
+
+  text-decoration: none; /* Removes underline from links */
+}
+
+.nav-item .btn.btn-danger {
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for color and background */
+}
+
+.nav-item .btn.btn-danger:hover, .nav-item .btn.btn-danger:focus {
+  color: #ffffff; /* Change text color on hover/focus */
+  background-color: #dc3545; /* Slightly lighter shade on hover/focus */
+}
+
+/* Active state styles */
+.nav-link.active {
+  color: #c9a941; /* Gold color for active state */
+  background-color: transparent; /* Keeps the background transparent for active state */
+}
