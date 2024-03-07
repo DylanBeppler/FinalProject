@@ -1,18 +1,30 @@
-<form>
 
-  <div class="mb-3 text-center">
-    <label for="username" class="form-label text-light">User Name</label>
-    <input type="text" class="form-control" name="username" placeholder="Username" [(ngModel)]="loginUser.username">
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true"></div>
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-light">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3 text-center">
+            <label for="usernameLoginModal" class="form-label">User Name</label>
+            <input type="text" class="form-control" id="usernameLoginModal" name="username" placeholder="Username" [(ngModel)]="loginUser.username">
+          </div>
+
+          <div class="mb-3 text-center">
+            <label for="passwordLoginModal" class="form-label">Password</label>
+            <input type="password" class="form-control" id="passwordLoginModal" name="password" placeholder="Password" [(ngModel)]="loginUser.password">
+          </div>
+
+          <div class="mb-3 d-grid gap-2">
+            <button (click)="login(loginUser)" type="submit" class="btn btn-primary">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
-  <div class="mb-3 text-center">
-    <label for="password" class="form-label text-light">Password</label>
-    <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="loginUser.password">
-  </div>
-
-  <div class="mb-3 d-grid gap-2">
-  <button (click)="login(loginUser)" type="submit" class="btn btn-primary">Login</button>
-  </div>
-</form>
 
 
