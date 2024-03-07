@@ -1,0 +1,45 @@
+.modal-content {
+  background-color: #1a1a1a; /* Dark theme background */
+  color: #ccc; /* Light text for contrast */
+}
+
+.modal-header {
+  border-bottom: 1px solid #333; /* Subtle border for the header */
+}
+
+.btn-close-white {
+  filter: invert(1); /* Invert color for the close button to make it white */
+}
+
+.form-control {
+  background-color: #333; /* Dark theme input fields */
+  border: 1px solid #444; /* Subtle border for inputs */
+  color: #ddd; /* Light color for text entered by the user */
+}
+
+
+.form-label {
+  color: #bbb; /* Slightly dimmer color for labels for contrast */
+}
+
+.btn-primary {
+  background-color: #0062cc; /* Adjust to your theme's primary color */
+  border-color: #005cbf; /* Slightly darker border for the button */
+  /* Add any other styling you may want for buttons */
+}
+
+/* Add this if you want to ensure that the label text is not too bright */
+.form-label {
+  color: #ccc;
+}
+
+/* Additional styling to ensure the modal fits your theme */
+.modal-header,
+.modal-footer {
+  border-color: #444; /* Adjust to match your site's color scheme */
+}
+
+.modal-dialog {
+  margin-top: 10%; /* Adjust this value to center the modal vertically as you like */
+  min-height: 200px;
+}
