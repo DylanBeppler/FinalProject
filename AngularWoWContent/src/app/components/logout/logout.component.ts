@@ -1,11 +1,23 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { RegisterComponent } from '../register/register.component';
+
+import {
+  MatDialog,
+  MatDialogRef,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogTitle,
+  MatDialogContent,
+} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-logout',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, RegisterComponent, MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
   templateUrl: './logout.component.html',
   styleUrl: './logout.component.css'
 })
@@ -13,7 +25,8 @@ export class LogoutComponent {
 
 constructor(
   private auth: AuthService,
-  private route: Router
+  private route: Router,
+  public dialogRef: MatDialogRef<RegisterComponent>
 ) {}
 
   logout() {

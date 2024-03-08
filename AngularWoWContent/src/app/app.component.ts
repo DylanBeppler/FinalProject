@@ -8,6 +8,7 @@ import { ContentComponent } from './components/content/content.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
     selector: 'app-root',
@@ -22,7 +23,8 @@ import { RegisterComponent } from './components/register/register.component';
       ContentComponent,
       LoginComponent,
       LogoutComponent,
-      RegisterComponent
+      RegisterComponent,
+      MatSlideToggleModule
 
     ]
 
