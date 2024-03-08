@@ -128,3 +128,16 @@ body {
     transform: scale(1.01); /* Slightly increase the size */
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* White glow around the image */
   }
+
+  .content-link {
+    display: inline-block; /* Allows transform to be applied */
+    transition: transform 0.3s ease; /* Smooth transition for the transform */
+    color: inherit; /* Keep the text color consistent */
+    text-decoration: none; /* Optional: removes the underline from links */
+  }
+
+  /* CSS for hovered state */
+  .content-link:hover {
+    transform: scale(1.05); /* Slightly increase the size */
+    text-decoration: none; /* Optional: ensures the underline doesn't re-appear on hover */
+  }

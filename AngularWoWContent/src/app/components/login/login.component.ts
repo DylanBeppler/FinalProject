@@ -5,16 +5,26 @@ import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from '../register/register.component';
 
+import {
+  MatDialog,
+  MatDialogRef,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogTitle,
+  MatDialogContent,
+} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, RegisterComponent],
+  imports: [FormsModule, RegisterComponent, MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router, public dialogRef: MatDialogRef<LoginComponent>) {}
 
   loginUser: User = new User();
 

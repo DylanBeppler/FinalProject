@@ -19,12 +19,14 @@
           <button class="btn btn-danger" (click)="logout()">Logout</button>
         </li>
 
-
         <li *ngIf="!isLoggedIn()" class="nav-item">
-          <a class="nav-link nav-text" (click)="openLoginModal()" href="#">Login</a>
+          <!-- <button mat-raised-button (click)="openLoginDialog('0ms', '0ms')">Login</button> -->
+
+          <a class="nav-link nav-text" (click)="openLoginDialog('500ms', '500ms')">Login</a>
         </li>
         <li *ngIf="!isLoggedIn()" class="nav-item">
-          <a class="nav-link nav-text" (click)="openRegisterModal()" href="#">Register</a>
+          <!-- <button mat-raised-button (click)="openRegisterDialog('0ms', '0ms')">Register</button> -->
+          <a class="nav-link nav-text" (click)="openRegisterDialog('500ms', '500ms')">Register</a>
         </li>
       </ul>
       <form class="d-flex" role="search">
