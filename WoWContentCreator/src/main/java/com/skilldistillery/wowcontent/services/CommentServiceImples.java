@@ -1,6 +1,5 @@
 package com.skilldistillery.wowcontent.services;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,22 +75,10 @@ public class CommentServiceImples implements CommentService {
 	}
 
 	@Override
-	public ContentComment update(String userName, int commentId, int contentId, ContentComment contentComment) {
-		User user = userRepo.findByUsername(userName);
-		Content content = null;
+	public ContentComment update(String userName, int contentId, int commentId, ContentComment contentComment) {
 		ContentComment managedComment = commentRepo.findByUser_UsernameAndId(userName, commentId);
-		Optional<Content> contentOpt = contentRepo.findById(contentId);
-		if (contentOpt.isPresent()) {
-			content = contentOpt.get();
-		}
 		if (managedComment != null) {
-			managedComment.setUser(user);
-			managedComment.setContent(content);
-			managedComment.setReplyToId(contentComment.getReplyToId());
 			managedComment.setMessage(contentComment.getMessage());
-			managedComment.setCommentDate(contentComment.getCommentDate());
-			managedComment.setUpdatedDate(LocalDateTime.now());
-			managedComment.setEnabled(contentComment.isEnabled());
 			managedComment.setImageUrl(contentComment.getImageUrl());
 			return commentRepo.saveAndFlush(managedComment);
 		}

@@ -10,7 +10,7 @@ export class Comment {
   updatedDate: string | null;
   content: Content;
   user: User;
-  replyToId: number;
+  replyToId: number | null;
 
   constructor(
     id: number = 0,
@@ -22,7 +22,7 @@ export class Comment {
     updatedDate: string = '',
     content: Content = new Content(),
     user: User = new User(),
-    replyToId: number = 0
+    replyToId: number | null = null
   ) {
     this.id = id;
     this.message = message;
