@@ -2,3 +2,13 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  font-family: Arial, sans-serif;
+  background-image: url(https://i.pinimg.com/originals/38/48/07/3848079620040bf461de8bf18ad52d1b.jpg);
+  height: 100%;
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+  color: #ccc;
+}
