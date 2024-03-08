@@ -107,7 +107,7 @@ export class CommentService {
   create(contentId: number, comment: Comment): Observable<Comment> {
     return this.http
       .post<Comment>(
-        this.urlContent + '/' + contentId + '/comment',
+        this.urlContent + '/' + contentId + '/comments',
         comment,
         this.getHttpOptions()
       )
@@ -136,7 +136,7 @@ export class CommentService {
     // }
     return this.http
       .put<Comment>(
-        this.urlContent + '/' + contentId + '/comment' + commentId,
+        this.urlContent + '/' + contentId + '/comments/' + commentId,
         editComment,
         this.getHttpOptions()
       )

@@ -3,7 +3,11 @@ package com.skilldistillery.wowcontent.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,30 +24,33 @@ public class ContentComment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
+	@CreationTimestamp
 	@Column(name = "comment_date")
 	private LocalDateTime commentDate;
-	
+
 	private String message;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	@JsonIgnore
 	private User user;
 
 	@ManyToOne
-    @JoinColumn(name = "content_id")
+	@JoinColumn(name = "content_id")
 	@JsonIgnore
 	private Content content;
-	
-	@Column(name = "reply_to_id")
-	private int replyToId;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "reply_to_id")
+	@JsonIgnore
+	private ContentComment inReplyTo;
+
 	private boolean enabled;
-	
+
 	@Column(name = "image_url")
 	private String imageUrl;
-	
+
+	@UpdateTimestamp
 	@Column(name = "updated_date")
 	private LocalDateTime updatedDate;
 
@@ -75,12 +82,12 @@ public class ContentComment {
 		this.message = message;
 	}
 
-	public int getReplyToId() {
-		return replyToId;
+	public ContentComment getInReplyTo() {
+		return inReplyTo;
 	}
 
-	public void setReplyToId(int replyToId) {
-		this.replyToId = replyToId;
+	public void setInReplyTo(ContentComment inReplyTo) {
+		this.inReplyTo = inReplyTo;
 	}
 
 	public boolean isEnabled() {
@@ -142,9 +149,7 @@ public class ContentComment {
 
 	@Override
 	public String toString() {
-		return "contentComment [id=" + id + ", commentDate=" + commentDate + ", message=" + message + ", user=" + user
-				+ ", content=" + content + ", replyTo=" + replyToId + ", enabled=" + enabled + ", imageUrl=" + imageUrl
-				+ ", updatedDate=" + updatedDate + "]";
+		return "contentComment [id= " + id + ", message=" + message + ", imageUrl=" + imageUrl + "]";
 	}
 
 }
