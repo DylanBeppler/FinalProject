@@ -29,7 +29,7 @@ export class ContentService {
   }
 
   index(): Observable<Content[]> {
-    return this.http.get<Content[]>(this.url, this.getHttpOptions()).pipe(
+    return this.http.get<Content[]>(this.url).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
