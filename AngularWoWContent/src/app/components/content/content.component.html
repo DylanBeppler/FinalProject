@@ -69,6 +69,33 @@
       <button class="btn btn-primary" (click)="updateContent(editContent)">Update</button>
     </form>
   </div>
+
+  <div *ngIf="selectedContent">
+    <div class="content">
+      <div class="categories-container">
+          <div class="category-box rounded-corners img-hover-effect">
+            <img src="{{ selectedContent.imageUrl }}" class="rounded-corners img-hover-effect" alt="{{ selectedContent.name }}">
+            <h2>{{ selectedContent.name }}</h2>
+            <p>{{ selectedContent.description }}</p>
+            <p>{{ selectedContent.contentCategory.name }}</p>
+          </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="selectedContent = null;">Go Back</button>
+    <button class="btn btn-primary" *ngIf="loggedInUser && selectedContent.user.id === loggedInUser.id" (click)="editContent = selectedContent">Edit Content</button>
+    <button class="btn btn-danger" *ngIf="loggedInUser && selectedContent.user.id === loggedInUser.id" (click)="deleteContent(selectedContent.id)">Delete Content</button>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
 </div>
 
 

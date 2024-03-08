@@ -112,17 +112,17 @@ export class ContentComponent implements OnInit {
         console.error(problem);
       },
     });
-    this.commentService.index().subscribe({
-      next: (allComments) => {
-        this.allComments = allComments;
-      },
-      error: (problem) => {
-        console.error(
-          'ContentComponent.reload(): error loading all comments: '
-        );
-        console.error(problem);
-      },
-    });
+    // this.commentService.index().subscribe({
+    //   next: (allComments) => {
+    //     this.allComments = allComments;
+    //   },
+    //   error: (problem) => {
+    //     console.error(
+    //       'ContentComponent.reload(): error loading all comments: '
+    //     );
+    //     console.error(problem);
+    //   },
+    // });
   }
 
   displayContent(content: Content) {
