@@ -87,29 +87,68 @@
   </div>
 
 
-
-
-
-
-
-
-
-
-
+<div class="displayComment" *ngIf="allComments != null && isLoggedIn() && selectedContent">
+  <ul *ngFor="let comment of allComments">
+    <li>{{comment.content.name}}</li>
+    <li>{{comment.updatedDate}}</li>
+    <li>{{comment.commentDate}}</li>
+    <li>{{comment.message}}</li>
+    <li>{{comment.description}}</li>
+    <li>{{comment.imageUrl}}</li>
+    <li>{{comment.replyToId}}</li>
+  </ul>
+    <div id="newComment" *ngIf="!editComment && isLoggedIn()">
+      <form class="row g-3">
+        <div class="col-md-6">
+          <label for="name">Message</label>
+          <input class="form-control" type="text" name="name" [(ngModel)]="newComment.message">
+        </div>
+        <div class="col-md-6">
+          <label for="name">Description</label>
+          <input class="form-control" type="text" name="name" [(ngModel)]="newComment.description">
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="description">Comment Date</label>
+            <textarea class="form-control" rows="5" type="Date" name="commentDate"
+              [(ngModel)]="newComment.commentDate"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="imageUrl">Image URL</label>
+            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newComment.imageUrl">
+          </div>
+          <br>
+          <button class="btn btn-primary" (click)="addComment(newComment.content.id, newComment)">Create Comment</button>
+        </div>
+      </form>
+    </div>
+    <div id="editComment" *ngIf="editComment && isLoggedIn()">
+      <form class="row g-3">
+        <div class="col-md-6">
+          <label for="name">Updated Message</label>
+          <input class="form-control" type="text" name="name" [(ngModel)]="editComment.message">
+        </div>
+        <div class="col-md-6">
+          <label for="name">Updated Description</label>
+          <input class="form-control" type="text" name="name" [(ngModel)]="editComment.description">
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="description">Updated Comment Date</label>
+            <textarea class="form-control" rows="5" type="Date" name="commentDate"
+              [(ngModel)]="editComment.commentDate"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="imageUrl">Updated Image URL</label>
+            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editComment.imageUrl">
+          </div>
+          <br>
+          <button class="btn btn-primary" (click)="addComment(newComment.content.id, editComment)">Update Comment</button>
+           <button class="btn btn-danger" *ngIf="loggedInUser && newComment.content.user.id === loggedInUser.id"
+                      (click)="deleteComment(newComment.content.id, editComment.id)">Delete Content</button>
+        </div>
+      </form>
+    </div>
+</div>
 </div>
 
-
-
-  <!-- <div id="todoDetail" *ngIf="selected && ! editTodo">
-    <h4>ID: {{selected.id}}</h4>
-    <p>{{selected.task}}</p>
-    <p>Completed? {{selected.completed}}</p>
-  <p>Complete Date: {{selected.completeDate}}</p>
-  <p>Description: <br>
-    {{selected.description}}
-  </p>
-  <button class="btn btn-outline-danger" (click)="displayTable()">Back</button>
-      <button (click)="editTodo = null">Cancel</button>
-
-  <button class="btn btn-outline-primary" (click)="setEditTodo()">Edit</button>
- -->

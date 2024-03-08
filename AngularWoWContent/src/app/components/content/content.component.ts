@@ -10,13 +10,14 @@ import { CommentService } from '../../services/comment.service';
 import { ContentCategoryPipe } from '../../pipes/content-category.pipe';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
+import { Comment } from '../../models/comment';
 
 @Component({
   selector: 'app-content',
   standalone: true,
   imports: [CommonModule, FormsModule, ContentCategoryPipe],
   templateUrl: './content.component.html',
-  styleUrls: ['./content.component.css']
+  styleUrls: ['./content.component.css'],
 })
 export class ContentComponent implements OnInit {
   editComment: Comment | null = null;
@@ -29,7 +30,7 @@ export class ContentComponent implements OnInit {
   selectedContent: Content | null = null;
   allContent: Content[] = [];
   allContentCategories: ContentCategory[] = [];
-  categoryName: string = "";
+  categoryName: string = '';
 
   loggedInUser: User | null = null;
 
@@ -65,7 +66,7 @@ export class ContentComponent implements OnInit {
     });
     this.activatedRoute.paramMap.subscribe({
       next: (params: ParamMap) => {
-        let contentCategoryParam = params.get("name");
+        let contentCategoryParam = params.get('name');
         if (contentCategoryParam) {
           this.categoryName = contentCategoryParam;
         }
@@ -84,7 +85,9 @@ export class ContentComponent implements OnInit {
           this.loggedInUser = user;
         },
         error: (problem) => {
-          console.error('ContentComponent.setLoggedInUser(): error setting logged in user: ');
+          console.error(
+            'ContentComponent.setLoggedInUser(): error setting logged in user: '
+          );
           console.error(problem);
         },
       });
@@ -107,22 +110,21 @@ export class ContentComponent implements OnInit {
       },
       error: (problem) => {
         console.error(
-          'ContentComponent.reload(): error loading all content categories: '
+          'ContentComponent.reload(): error loading all content categories: ');
+        console.error(problem);
+      },
+    });
+    this.commentService.index().subscribe({
+      next: (allComments) => {
+        this.allComments = allComments;
+      },
+      error: (problem) => {
+        console.error(
+          'ContentComponent.reload(): error loading all comments: '
         );
         console.error(problem);
       },
     });
-    // this.commentService.index().subscribe({
-    //   next: (allComments) => {
-    //     this.allComments = allComments;
-    //   },
-    //   error: (problem) => {
-    //     console.error(
-    //       'ContentComponent.reload(): error loading all comments: '
-    //     );
-    //     console.error(problem);
-    //   },
-    // });
   }
 
   displayContent(content: Content) {
@@ -194,7 +196,7 @@ export class ContentComponent implements OnInit {
       error: () => {},
     });
   }
-  getCommentsByContentId(contentId: number, commentId: number) {
+  getCommentsByContentId(contentId: number) {
     this.commentService.commentsByContentId(contentId).subscribe({
       next: (comment) => {
         (this.allComments = comment), this.reload();
