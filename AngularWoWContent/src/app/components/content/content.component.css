@@ -16,37 +16,6 @@
   color: white;
 }
 
-.category-box h2 {
-  border-bottom: 1px solid #555; /* Subtle line under the title */
-  padding-bottom: 10px;
-  margin-bottom: 20px; /* Space between title and links */
-}
-
-.category-box ul {
-  list-style: none; /* Remove bullet points */
-  padding: 0; /* Remove default padding */
-}
-
-.category-box li {
-  padding: 5px 0; /* Space between links */
-}
-
-.category-box a {
-  color: #c9a941; /* Adjust link color as needed */
-  text-decoration: none; /* Remove underline */
-  /* Style for icons could be added here */
-}
-
-.category-link {
-  display: block; /* This will ensure the anchor tag behaves like a block-level element */
-  text-decoration: none; /* This will remove the underline from the link */
-  color: inherit; /* This ensures that the link color is the same as your text color */
-}
-
-.category-box a:hover {
-  text-decoration: underline; /* Underline on hover */
-}
-
 .selected-content-img-size {
   width: 75%;
   height: 75%;

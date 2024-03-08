@@ -1,44 +1,58 @@
 <div class="container">
-  <br><br>
+  <br /><br />
   <div class="row" *ngIf="!selectedContent">
-      <div class="col-md-4 mb-3" style="width: 18rem;" *ngFor="let content of allContent | contentCategory:categoryName">
-        <div class="card">
-          <img class="card-img-top" src="{{content.imageUrl}}" alt="{{content.name}}">
-          <div class="card-body">
-            <h5 class="card-title">{{content.name}}</h5>
-            <p class="card-text">{{content.description}}</p>
-            <button class="btn btn-primary" (click)="selectedContent = content;">Content Details</button>
-          </div>
+    <div class="col-md-4 mb-3" style="width: 18rem" *ngFor="let content of allContent | contentCategory : categoryName">
+      <div class="card">
+        <img class="card-img-top" src="{{ content.imageUrl }}" alt="{{ content.name }}" />
+        <div class="card-body">
+          <h5 class="card-title">{{ content.name }}</h5>
+          <p class="card-text">{{ content.description }}</p>
+          <small>Posted on: {{ content.createdDate | date }}</small>
+          <button class="btn btn-primary" (click)="selectedContent = content">
+            Content Details
+          </button>
         </div>
       </div>
+    </div>
   </div>
 
   <div *ngIf="selectedContent && !editContent">
     <div class="content">
       <div class="content-container">
-          <img src="{{ selectedContent.imageUrl }}" class="rounded-corners img-hover-effect selected-content-img-size" alt="{{ selectedContent.name }}">
-          <h2>{{ selectedContent.name }}</h2>
-          <p>{{ selectedContent.description }}</p>
-          <p>{{ selectedContent.contentCategory.name }}</p>
+        <img src="{{ selectedContent.imageUrl }}" class="rounded-corners img-hover-effect selected-content-img-size"
+          alt="{{ selectedContent.name }}" />
+        <h2>{{ selectedContent.name }}</h2>
+        <p>{{ selectedContent.description }}</p>
+        <p>{{ selectedContent.contentCategory.name }}</p>
       </div>
     </div>
+    <br />
+    <button class="btn btn-primary" (click)="selectedContent = null">
+      Go Back
+    </button>
+    <button class="btn btn-primary" *ngIf="loggedInUser && selectedContent.user.id === loggedInUser.id"
+      (click)="editContent = selectedContent">
+      Edit Content
+    </button>
+    <button class="btn btn-danger" *ngIf="loggedInUser && selectedContent.user.id === loggedInUser.id"
+      (click)="deleteContent(selectedContent.id); selectedContent = null">
+      Delete Content
+    </button>
     <hr>
-    <button class="btn btn-primary" (click)="selectedContent = null;">Go Back</button>
-    <button class="btn btn-primary" *ngIf="loggedInUser && selectedContent.user.id === loggedInUser.id" (click)="editContent = selectedContent">Edit Content</button>
-    <button class="btn btn-danger" *ngIf="loggedInUser && selectedContent.user.id === loggedInUser.id" (click)="deleteContent(selectedContent.id); selectedContent = null;">Delete Content</button>
-    <br><br><br>
   </div>
 
   <div id="newContent" *ngIf="!selectedContent && !editContent && isLoggedIn()">
     <form class="row g-3">
       <div class="col-md-6">
         <label for="name">Title</label>
-        <input class="form-control" type="text" name="name" [(ngModel)]="newContent.name">
+        <input class="form-control" type="text" name="name" [(ngModel)]="newContent.name" />
       </div>
       <div class="col-md-6">
         <label for="category">Category</label>
         <select class="form-control" name="category" [(ngModel)]="newContent.contentCategory.id">
-          <option *ngFor="let category of allContentCategories" name="category" value="{{category.id}}">{{category.name}}</option>
+          <option *ngFor="let category of allContentCategories" name="category" value="{{ category.id }}">
+            {{ category.name }}
+          </option>
         </select>
       </div>
       <div class="form-group">
@@ -47,24 +61,28 @@
       </div>
       <div class="form-group">
         <label for="imageUrl">Image URL</label>
-        <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newContent.imageUrl">
+        <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newContent.imageUrl" />
       </div>
-      <br>
-      <button class="btn btn-primary" (click)="createContent(newContent)">Create</button>
+      <br />
+      <button class="btn btn-primary" (click)="createContent(newContent)">
+        Create
+      </button>
     </form>
-    <br><br><br>
+    <br /><br /><br />
   </div>
 
   <div id="editContent" *ngIf="editContent">
     <form class="row g-3">
       <div class="col-md-6">
         <label for="name">Title</label>
-        <input class="form-control" type="text" name="name" [(ngModel)]="editContent.name">
+        <input class="form-control" type="text" name="name" [(ngModel)]="editContent.name" />
       </div>
       <div class="col-md-6">
         <label for="category">Category</label>
         <select class="form-control" name="category" [(ngModel)]="editContent.contentCategory.id">
-          <option *ngFor="let category of allContentCategories" name="category" value="{{category.id}}">{{category.name}}</option>
+          <option *ngFor="let category of allContentCategories" name="category" value="{{ category.id }}">
+            {{ category.name }}
+          </option>
         </select>
       </div>
       <div class="form-group">
@@ -73,85 +91,67 @@
       </div>
       <div class="form-group">
         <label for="imageUrl">Image URL</label>
-        <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editContent.imageUrl">
+        <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editContent.imageUrl" />
       </div>
-      <br>
-      <button class="btn btn-primary" (click)="updateContent(editContent)">Update</button>
+      <br />
+      <button class="btn btn-primary" (click)="updateContent(editContent)">
+        Update
+      </button>
     </form>
   </div>
 
-  <div *ngIf="selectedContent">
-    <div class="content">
-      <div class="categories-container">
-          <div class="category-box rounded-corners img-hover-effect">
-            <img src="{{ selectedContent.imageUrl }}" class="rounded-corners img-hover-effect" alt="{{ selectedContent.name }}">
-            <h2>{{ selectedContent.name }}</h2>
-            <p>{{ selectedContent.description }}</p>
-            <p>{{ selectedContent.contentCategory.name }}</p>
-          </div>
+  <div class="displayComment" *ngIf="allComments != null && selectedContent">
+    <div class="content" *ngFor="let comment of allComments">
+      <div class="content-container">
+        <h2>{{ comment.user.username }}</h2>
+        <p>{{ comment.message }}</p>
+        <p>{{ comment.updatedDate | date }}</p>
+        <img src="{{ comment.imageUrl }}" class="rounded-corners img-hover-effect selected-content-img-size"
+          alt="{{ selectedContent.name }}" />
       </div>
+      <button class="btn btn-primary" *ngIf="loggedInUser && selectedContent.user.id === loggedInUser.id"
+        (click)="editComment = comment">
+        Edit Comment
+      </button>
+      <button class="btn btn-danger" *ngIf="loggedInUser && selectedContent.user.id === loggedInUser.id"
+        (click)="deleteComment(selectedContent.id, comment.id)">
+        Delete Comment
+      </button>
     </div>
-    <button class="btn btn-primary" (click)="selectedContent = null;">Go Back</button>
-    <button class="btn btn-primary" *ngIf="loggedInUser && selectedContent.user.id === loggedInUser.id" (click)="editContent = selectedContent">Edit Content</button>
-    <button class="btn btn-danger" *ngIf="loggedInUser && selectedContent.user.id === loggedInUser.id" (click)="deleteContent(selectedContent.id)">Delete Content</button>
-  </div>
-
-
-<div class="displayComment" *ngIf="allComments != null && isLoggedIn() && selectedContent">
-  <ul *ngFor="let comment of allComments">
-    <li>{{comment.content.name}}</li>
-    <li>{{comment.updatedDate}}</li>
-    <li>{{comment.commentDate}}</li>
-    <li>{{comment.message}}</li>
-    <li>{{comment.imageUrl}}</li>
-    <li>{{comment.replyToId}}</li>
-  </ul>
-    <div id="newComment" *ngIf="!editComment && isLoggedIn()">
-      <form class="row g-3">
-        <div class="col-md-6">
-          <label for="name">Message</label>
-          <input class="form-control" type="text" name="name" [(ngModel)]="newComment.message">
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="description">Comment Date</label>
-            <textarea class="form-control" rows="5" type="Date" name="commentDate"
-              [(ngModel)]="newComment.commentDate"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="imageUrl">Image URL</label>
-            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newComment.imageUrl">
-          </div>
-          <br>
-          <button class="btn btn-primary" (click)="addComment(newComment.content.id, newComment)">Create Comment</button>
-        </div>
-      </form>
-    </div>
+    <hr />
     <div id="editComment" *ngIf="editComment && isLoggedIn()">
       <form class="row g-3">
-        <div class="col-md-6">
-          <label for="name">Updated Message</label>
-          <input class="form-control" type="text" name="name" [(ngModel)]="editComment.message">
+        <div class="form-group">
+          <label for="message">Update Message</label>
+          <textarea class="form-control" rows="5" name="message" [(ngModel)]="editComment.message"></textarea>
         </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="description">Updated Comment Date</label>
-            <textarea class="form-control" rows="5" type="Date" name="commentDate"
-              [(ngModel)]="editComment.commentDate"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="imageUrl">Updated Image URL</label>
-            <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editComment.imageUrl">
-          </div>
-          <br>
-          <button class="btn btn-primary" (click)="addComment(newComment.content.id, editComment)">Update Comment</button>
-           <button class="btn btn-danger" *ngIf="loggedInUser && newComment.content.user.id === loggedInUser.id"
-                      (click)="deleteComment(newComment.content.id, editComment.id)">Delete Content</button>
+        <div class="form-group">
+          <label for="imageUrl">Update Image URL</label>
+          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editComment.imageUrl" />
         </div>
+        <br>
+        <button class="btn btn-primary" (click)="updateComment(selectedContent.id, editComment.id, editComment); editComment = null;">
+          Update Comment
+        </button>
       </form>
+      <br><br><br>
     </div>
+    <div id="newComment" *ngIf="!editComment && isLoggedIn()">
+      <form class="row g-3">
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea class="form-control" rows="5" name="message" [(ngModel)]="newComment.message"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="imageUrl">Image URL</label>
+          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newComment.imageUrl" />
+        </div>
+        <br>
+        <button class="btn btn-primary" (click)="addComment(selectedContent.id, newComment)">
+          Add Comment
+        </button>
+      </form>
+      <br><br><br>
+    </div>
+  </div>
 </div>
-</div>
-
-
-
