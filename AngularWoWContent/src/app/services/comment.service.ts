@@ -1,4 +1,5 @@
 import { DatePipe } from '@angular/common';
+import { Comment } from '../models/comment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
@@ -14,7 +15,6 @@ export class CommentService {
 
   constructor(
     private http: HttpClient,
-    private datePipe: DatePipe,
     private auth: AuthService
   ) {}
 
