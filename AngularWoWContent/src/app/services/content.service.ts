@@ -103,10 +103,4 @@ export class ContentService {
         })
       );
   }
-
-  getLatestContents(limit: number): Observable<Content[]> {
-    return this.http.get<Content[]>(`${this.url}`);
-  }
-
-
 }

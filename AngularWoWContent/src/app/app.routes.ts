@@ -18,7 +18,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'content/:name', component: ContentComponent },
-  {path: 'content/latest', component: LatestPostsComponent},
+  {path: 'latest', component: LatestPostsComponent},
   { path: '**', component: NotFoundComponent }
 
 

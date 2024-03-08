@@ -5,13 +5,14 @@ import { Content } from '../../models/content';
 import { ContentCategory } from '../../models/content-category';
 import { ContentService } from '../../services/content.service';
 import { CommentService } from '../../services/comment.service';
+import { ContentCategoryPipe } from "../../pipes/content-category.pipe";
 
 @Component({
-  selector: 'app-latest-posts',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './latest-posts.component.html',
-  styleUrl: './latest-posts.component.css'
+    selector: 'app-latest-posts',
+    standalone: true,
+    templateUrl: './latest-posts.component.html',
+    styleUrl: './latest-posts.component.css',
+    imports: [CommonModule, ContentCategoryPipe]
 })
 export class LatestPostsComponent {
 
