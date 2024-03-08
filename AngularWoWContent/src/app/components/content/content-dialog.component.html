@@ -1,0 +1,18 @@
+<h1>Hello</h1>
+<div id="editComment" *ngIf="editComment && isLoggedIn()">
+  <form class="row g-3">
+    <div class="form-group">
+      <label for="message">Update Message</label>
+      <textarea class="form-control" rows="5" name="message" [(ngModel)]="editComment.message"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="imageUrl">Update Image URL</label>
+      <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editComment.imageUrl" />
+    </div>
+    <br>
+    <button class="btn btn-primary" (click)="updateComment(selectedContent.id, editComment.id, editComment); editComment = null;">
+      Update Comment
+    </button>
+  </form>
+  <br><br><br>
+</div>

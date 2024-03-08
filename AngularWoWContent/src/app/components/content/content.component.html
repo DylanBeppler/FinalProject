@@ -1,6 +1,6 @@
 <div class="container">
   <br /><br />
-  <div class="row" *ngIf="!selectedContent">
+  <div class="row" *ngIf="!selectedContent && !editComment && !editContent">
     <div class="col-md-4 mb-3" style="width: 18rem" *ngFor="let content of allContent | contentCategory : categoryName">
       <div class="card">
         <img class="card-img-top" src="{{ content.imageUrl }}" alt="{{ content.name }}" />
@@ -41,7 +41,7 @@
     <hr>
   </div>
 
-  <div id="newContent" *ngIf="!selectedContent && !editContent && isLoggedIn()">
+  <div id="newContent" *ngIf="!selectedContent && !editContent && isLoggedIn() &&!editComment">
     <form class="row g-3">
       <div class="col-md-6">
         <label for="name">Title</label>
@@ -117,6 +117,7 @@
         (click)="deleteComment(selectedContent.id, comment.id)">
         Delete Comment
       </button>
+      <button class="btn btn-primary" (click)=" setEditComment(comment); openCommentDialog('500ms', '500ms');">Update Comment</button>
     </div>
     <hr />
     <div id="editComment" *ngIf="editComment && isLoggedIn()">
@@ -136,6 +137,8 @@
       </form>
       <br><br><br>
     </div>
+
+
     <div id="newComment" *ngIf="!editComment && isLoggedIn()">
       <form class="row g-3">
         <div class="form-group">
