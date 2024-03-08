@@ -27,7 +27,12 @@ export class LatestPostsComponent {
   loadLatestContent(): void {
     this.contentService.index().subscribe({
       next: (contents) => {
-        this.latestContents = contents;
+        this.latestContents = contents.sort((a, b) =>
+        {
+          return new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime();
+        })
+        .slice(0, 10);
+
       },
       error: (err) => {
         console.error('Error fetching latest content', err);

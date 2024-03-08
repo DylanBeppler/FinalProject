@@ -1,20 +1,24 @@
+<html>
+<body>
 
 
-<ng-template #noContent>
-  <p>No latest content available.</p>
-</ng-template>
+  <ng-template #noContent>
+    <p>No latest content available.</p>
+  </ng-template>
 
 
-<div *ngIf="latestContents.length > 0; else noContent"></div>
-<div class="row">
-<div class="col-md-4 mb-3" style="width: 25rem" *ngFor="let content of latestContents">
-  <div class="card">
-    <img class="card-img-top" src="{{ content.imageUrl }}" alt="{{ content.name }}" />
-    <div class="card-body">
-      <h5 class="card-title">{{ content.name }}</h5>
-      <p class="card-text">{{ content.description }}</p>
-      <small>Posted on: {{ content.createdDate | date }}</small>
-       </div>
+  <div *ngIf="latestContents.length > 0; else noContent"></div>
+  <div class="row">
+    <div class="col-md-4 mb-3" style="width: 25rem" *ngFor="let content of latestContents">
+      <div class="card">
+        <img class="card-img-top" src="{{ content.imageUrl }}" alt="{{ content.name }}" />
+        <div class="card-body">
+          <h5 class="card-title">{{ content.name }}</h5>
+          <p class="card-text">{{ content.description }}</p>
+          <small>Posted on: {{ content.createdDate | date }}</small>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-</div>
+</body>
+  </html>
