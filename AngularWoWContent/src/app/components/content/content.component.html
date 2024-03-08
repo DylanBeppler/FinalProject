@@ -1,4 +1,4 @@
-<div class="container">
+<div id="image-container" class="container">
   <br /><br />
   <div class="row" *ngIf="!selectedContent && !editComment && !editContent">
     <div class="col-md-4 mb-3" style="width: 18rem" *ngFor="let content of allContent | contentCategory : categoryName">
@@ -100,61 +100,40 @@
     </form>
   </div>
 
+  <div id="newComment" *ngIf="!editComment && isLoggedIn() && selectedContent">
+    <form class="row g-3">
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea class="form-control" rows="5" name="message" [(ngModel)]="newComment.message"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="imageUrl">Image URL</label>
+        <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newComment.imageUrl" />
+      </div>
+      <br>
+      <button class="btn btn-primary" (click)="addComment(selectedContent.id, newComment)">
+        Add Comment
+      </button>
+    </form>
+    <hr>
+  </div>
+
   <div class="displayComment" *ngIf="allComments != null && selectedContent">
     <div class="content" *ngFor="let comment of allComments">
       <div class="content-container">
         <h2>{{ comment.user.username }}</h2>
         <p>{{ comment.message }}</p>
         <p>{{ comment.updatedDate | date }}</p>
-        <img src="{{ comment.imageUrl }}" class="rounded-corners img-hover-effect selected-content-img-size"
+        <img src="{{ comment.user.avatarUrl }}" class="rounded-corners img-hover-effect selected-content-img-size"
           alt="{{ selectedContent.name }}" />
       </div>
-      <button class="btn btn-primary" *ngIf="loggedInUser && selectedContent.user.id === loggedInUser.id"
-        (click)="editComment = comment">
-        Edit Comment
-      </button>
+      <button class="btn btn-primary" (click)=" setEditComment(comment); openCommentDialog('500ms', '500ms');">Update
+        Comment</button>
       <button class="btn btn-danger" *ngIf="loggedInUser && selectedContent.user.id === loggedInUser.id"
         (click)="deleteComment(selectedContent.id, comment.id)">
         Delete Comment
       </button>
-      <button class="btn btn-primary" (click)=" setEditComment(comment); openCommentDialog('500ms', '500ms');">Update Comment</button>
     </div>
     <hr />
-    <div id="editComment" *ngIf="editComment && isLoggedIn()">
-      <form class="row g-3">
-        <div class="form-group">
-          <label for="message">Update Message</label>
-          <textarea class="form-control" rows="5" name="message" [(ngModel)]="editComment.message"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="imageUrl">Update Image URL</label>
-          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editComment.imageUrl" />
-        </div>
-        <br>
-        <button class="btn btn-primary" (click)="updateComment(selectedContent.id, editComment.id, editComment); editComment = null;">
-          Update Comment
-        </button>
-      </form>
-      <br><br><br>
-    </div>
-
-
-    <div id="newComment" *ngIf="!editComment && isLoggedIn()">
-      <form class="row g-3">
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea class="form-control" rows="5" name="message" [(ngModel)]="newComment.message"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="imageUrl">Image URL</label>
-          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newComment.imageUrl" />
-        </div>
-        <br>
-        <button class="btn btn-primary" (click)="addComment(selectedContent.id, newComment)">
-          Add Comment
-        </button>
-      </form>
-      <br><br><br>
-    </div>
   </div>
 </div>
