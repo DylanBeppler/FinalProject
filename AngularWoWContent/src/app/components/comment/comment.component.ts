@@ -46,7 +46,7 @@ export class CommentComponent implements OnInit {
   reload(): void {
     this.commentService.index().subscribe({
       next: (comment) => {
-        this.allComments = comment;
+        // this.allComments = comment;
       },
       error: (problem) => {
         console.error(
