@@ -284,7 +284,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `wowcontentdb`;
-INSERT INTO `content_has_content` (`content_id`, `content_id1`) VALUES (1, 1);
+INSERT INTO `content_has_content` (`content_id`, `content_id1`) VALUES (1, 2);
+INSERT INTO `content_has_content` (`content_id`, `content_id1`) VALUES (1, 3);
+INSERT INTO `content_has_content` (`content_id`, `content_id1`) VALUES (1, 7);
 
 COMMIT;
 
@@ -305,6 +307,26 @@ COMMIT;
 START TRANSACTION;
 USE `wowcontentdb`;
 INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (1, '2024/03/04', 'test', 1, 1, 1, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (2, '2024/03/04', 'test', 1, 2, 2, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (3, '2024/03/04', 'test', 1, 3, 3, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (4, '2024/03/04', 'test', 1, 4, 4, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (5, '2024/03/04', 'test', 1, 5, 5, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (6, '2024/03/04', 'test', 1, 6, 6, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (7, '2024/03/04', 'test', 1, 7, 7, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (8, '2024/03/04', 'test', 1, 8, 8, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (9, '2024/03/04', 'test', 1, 9, 9, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (10, '2024/03/04', 'test', 1, 10, 10, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (11, '2024/03/04', 'test', 1, 11, 11, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (12, '2024/03/04', 'test', 1, 12, 12, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (13, '2024/03/04', 'test', 1, 13, 13, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (14, '2024/03/04', 'test', 1, 14, 14, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (15, '2024/03/04', 'test', 1, 15, 15, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (16, '2024/03/04', 'test', 1, 16, 16, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (17, '2024/03/04', 'test', 1, 17, 17, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (18, '2024/03/04', 'test', 1, 18, 18, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (19, '2024/03/04', 'test', 1, 19, 19, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (20, '2024/03/04', 'test', 1, 20, 20, 1, 'test', '2024/03/24');
+INSERT INTO `content_comment` (`id`, `comment_date`, `message`, `user_id`, `content_id`, `reply_to_id`, `enabled`, `image_url`, `updated_date`) VALUES (21, '2024/03/04', 'test', 1, 21, 21, 1, 'test', '2024/03/24');
 
 COMMIT;
 
@@ -315,6 +337,26 @@ COMMIT;
 START TRANSACTION;
 USE `wowcontentdb`;
 INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (1, 1, 1, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (2, 1, 2, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (3, 1, 3, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (4, 1, 4, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (5, 1, 5, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (6, 1, 6, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (7, 1, 7, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (8, 1, 8, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (9, 1, 9, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (10, 1, 10, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (11, 1, 11, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (12, 1, 12, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (13, 1, 13, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (14, 1, 14, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (15, 1, 15, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (16, 1, 16, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (17, 1, 17, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (18, 1, 18, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (19, 1, 19, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (20, 1, 20, false, '2024/03/05');
+INSERT INTO `content_vote` (`id`, `user_id`, `content_id`, `upvoted`, `vote_date`) VALUES (21, 1, 21, false, '2024/03/05');
 
 COMMIT;
 
