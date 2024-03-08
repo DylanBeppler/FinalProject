@@ -4,26 +4,16 @@
 }
 
 .content h3 {
-    color: white; /* White text for the main content */
-  }
+  color: white; /* White text for the main content */
+}
 
-.categories-container {
+.content-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px; /* Adjust the space between boxes as needed */
   background-color: #333; /* Dark background */
   justify-content: space-between;
-}
-
-.category-box {
-  flex: 0 0 calc(50% - 20px);
-  min-width: 250px; /* Minimum width of each category box */
-  max-width: 450px;
-  background-color: #1a1a1a; /* Slightly darker boxes for contrast */
-  padding: 20px;
-  border-radius: 8px; /* Rounded corners */
-  color: white; /* Text color */
-  box-sizing: border-box;
+  color: white;
 }
 
 .category-box h2 {
@@ -55,4 +45,9 @@
 
 .category-box a:hover {
   text-decoration: underline; /* Underline on hover */
+}
+
+.selected-content-img-size {
+  width: 75%;
+  height: 75%;
 }
