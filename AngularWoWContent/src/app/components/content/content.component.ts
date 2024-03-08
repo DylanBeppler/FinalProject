@@ -1,3 +1,4 @@
+import { Comment } from './../../models/comment';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -10,12 +11,25 @@ import { CommentService } from '../../services/comment.service';
 import { ContentCategoryPipe } from '../../pipes/content-category.pipe';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
-import { Comment } from '../../models/comment';
+
+
+import {
+  MatDialog,
+  MatDialogRef,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogTitle,
+  MatDialogContent,
+} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { CommentComponent } from '../comment/comment.component';
+import { NavigationDialogComponent } from '../navigation/navigation.component';
+import { EditCommentComponent } from '../edit-comment/edit-comment.component';
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [CommonModule, FormsModule, ContentCategoryPipe],
+  imports: [CommonModule, FormsModule, ContentCategoryPipe, MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css'],
 })
@@ -41,7 +55,9 @@ export class ContentComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private auth: AuthService
+    private auth: AuthService,
+    public dialog: MatDialog
+
   ) {}
 
   ngOnInit(): void {
@@ -147,8 +163,9 @@ export class ContentComponent implements OnInit {
     this.editContent = Object.assign({}, this.selectedContent);
   }
 
-  setEditComment() {
-    this.editComment = Object.assign({}, this.selectedComment);
+  setEditComment(comment: Comment) {
+    this.editComment = Object.assign({}, comment);
+  console.log(this.editComment);
   }
 
   getContent(contentId: number) {
@@ -268,5 +285,20 @@ export class ContentComponent implements OnInit {
       error: () => {},
     });
   }
+
+
+
+  openCommentDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(EditCommentComponent, {
+      data:{editComment: this.editComment, selectedContent: this.selectedContent},
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
+
+
+
 }
 
