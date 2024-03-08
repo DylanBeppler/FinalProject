@@ -289,11 +289,15 @@ export class ContentComponent implements OnInit {
 
 
   openCommentDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(EditCommentComponent, {
+    let dialogRef = this.dialog.open(EditCommentComponent, {
       data:{editComment: this.editComment, selectedContent: this.selectedContent},
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.editComment = null;
+      this.reload();
     });
   }
 

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Comment } from './../../models/comment';
 import { CommentService } from '../../services/comment.service';
 import { Content } from '../../models/content';
@@ -15,7 +15,7 @@ import { Content } from '../../models/content';
 })
 export class EditCommentComponent {
   allComments: Comment[] = [];
-  constructor(private commentService: CommentService, @Inject(MAT_DIALOG_DATA) public data: {editComment: Comment | null, selectedContent: Content}) { }
+  constructor(private commentService: CommentService, @Inject(MAT_DIALOG_DATA) public data: {editComment: Comment | null, selectedContent: Content}, public dialogRef: MatDialogRef<EditCommentComponent>) { }
 
 
 updateComment(
@@ -26,17 +26,7 @@ updateComment(
 ) {
   this.commentService.update(contentId, commentId, comment).subscribe({
     next: (comment) => {
-      this.commentService.index().subscribe({
-        next: (allComments) => {
-          this.allComments = allComments;
-        },
-        error: (problem) => {
-          console.error(
-            'ContentComponent.reload(): error loading all comments: '
-          );
-          console.error(problem);
-        },
-      });
+      this.dialogRef.close();
     },
     error: (kaboom: any) => {
       console.error('Error updating comment');
