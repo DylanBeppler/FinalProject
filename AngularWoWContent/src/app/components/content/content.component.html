@@ -9,12 +9,16 @@
           <p class="card-text">{{ content.description }}</p>
           <br>
           # of Votes <br>
+          {{getTotalVotes(content.votes)}}
+          <!-- Figure out how to show the number of upvotes and downvotes based on the vote's boolean variable
+          Probably some sort of iterating and counting truthy vs non-truthy -->
           <br>
           <small>Posted on: {{ content.createdDate | date }}</small>
           <button class="btn btn-primary" (click)="selectedContent = content">
             Content Details
           </button>
           <span>&emsp;&#8679;</span>
+          <!-- Figure out how to add a vote if a user hasn't already voted, and update vote if they have -->
           <span>&emsp;&#8681;</span>
         </div>
       </div>
@@ -143,5 +147,3 @@
     <hr />
   </div>
 </div>
-<script data-require="angular.js@1.2.x" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"
-  data-semver="1.2.16"></script>

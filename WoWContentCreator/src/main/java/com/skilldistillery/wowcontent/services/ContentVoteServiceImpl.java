@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.wowcontent.entities.Content;
 import com.skilldistillery.wowcontent.entities.ContentVote;
@@ -12,6 +13,7 @@ import com.skilldistillery.wowcontent.repositories.ContentRepository;
 import com.skilldistillery.wowcontent.repositories.ContentVoteRepository;
 import com.skilldistillery.wowcontent.repositories.UserRepository;
 
+@Service
 public class ContentVoteServiceImpl implements ContentVoteService {
 
 	@Autowired

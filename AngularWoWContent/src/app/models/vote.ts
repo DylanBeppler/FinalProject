@@ -3,7 +3,7 @@ import { User } from "./user";
 
 export class Vote {
   id: number;
-  upvoted: boolean;
+  upvoted: boolean | null;
   voteDate: string;
   content: Content;
   user: User;
@@ -11,7 +11,7 @@ export class Vote {
   constructor(
     id: number = 0,
     voteDate: string = '',
-    upvoted: boolean = false,
+    upvoted: null = null,
     content: Content = new Content(),
     user: User = new User()
   ) {
