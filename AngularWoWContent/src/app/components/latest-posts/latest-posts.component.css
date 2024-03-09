@@ -53,3 +53,31 @@ small {
   font-size: 0.8em;
   color: #666;
 }
+
+.content {
+  text-align: center;
+}
+
+.content-container {
+  color: white;
+}
+
+.category-link {
+  display: block; /* This will ensure the anchor tag behaves like a block-level element */
+  text-decoration: none; /* This will remove the underline from the link */
+  color: inherit; /* This ensures that the link color is the same as your text color */
+}
+
+.rounded-corners {
+  border-radius: 10px; /* Adjust the pixel value to increase or decrease the rounding */
+}
+
+
+.img-hover-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for the transform and shadow */
+}
+
+.img-hover-effect:hover {
+  transform: scale(1.01); /* Slightly increase the size */
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* White glow around the image */
+}
