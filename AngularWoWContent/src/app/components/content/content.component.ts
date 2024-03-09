@@ -12,7 +12,6 @@ import { ContentCategoryPipe } from '../../pipes/content-category.pipe';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 
-
 import {
   MatDialog,
   MatDialogRef,
@@ -25,11 +24,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommentComponent } from '../comment/comment.component';
 import { NavigationDialogComponent } from '../navigation/navigation.component';
 import { EditCommentComponent } from '../edit-comment/edit-comment.component';
+import { VoteService } from '../../services/vote.service';
+import { Vote } from '../../models/vote';
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [CommonModule, FormsModule, ContentCategoryPipe, MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ContentCategoryPipe,
+    MatButtonModule,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogTitle,
+    MatDialogContent,
+  ],
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css'],
 })
@@ -48,16 +58,19 @@ export class ContentComponent implements OnInit {
 
   loggedInUser: User | null = null;
 
+  allContentVotes: Vote[] = [];
+  newVote: Vote = new Vote();
+
   constructor(
     private commentService: CommentService,
     private contentService: ContentService,
     private contentCategoryService: ContentCategoryService,
+    private voteService: VoteService,
     private activateRoute: ActivatedRoute,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private auth: AuthService,
     public dialog: MatDialog
-
   ) {}
 
   ngOnInit(): void {
@@ -126,7 +139,8 @@ export class ContentComponent implements OnInit {
       },
       error: (problem) => {
         console.error(
-          'ContentComponent.reload(): error loading all content categories: ');
+          'ContentComponent.reload(): error loading all content categories: '
+        );
         console.error(problem);
       },
     });
@@ -137,6 +151,17 @@ export class ContentComponent implements OnInit {
       error: (problem) => {
         console.error(
           'ContentComponent.reload(): error loading all comments: '
+        );
+        console.error(problem);
+      },
+    });
+    this.voteService.index().subscribe({
+      next: (allVotes) => {
+        this.allContentVotes = allVotes;
+      },
+      error: (problem) => {
+        console.error(
+          'ContentComponent.reload(): error loading all votes: '
         );
         console.error(problem);
       },
@@ -165,7 +190,7 @@ export class ContentComponent implements OnInit {
 
   setEditComment(comment: Comment) {
     this.editComment = Object.assign({}, comment);
-  console.log(this.editComment);
+    console.log(this.editComment);
   }
 
   getContent(contentId: number) {
@@ -264,7 +289,7 @@ export class ContentComponent implements OnInit {
   ) {
     this.commentService.update(contentId, commentId, comment).subscribe({
       next: (comment) => {
-        this.editContent = null;
+        this.editComment = null;
         if (goToDetail) {
           this.selectedComment = comment;
         }
@@ -286,23 +311,69 @@ export class ContentComponent implements OnInit {
     });
   }
 
-
-
-  openCommentDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  openCommentDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
     let dialogRef = this.dialog.open(EditCommentComponent, {
-      data:{editComment: this.editComment, selectedContent: this.selectedContent},
+      data: {
+        editComment: this.editComment,
+        selectedContent: this.selectedContent,
+      },
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.editComment = null;
       this.reload();
     });
   }
 
+  getContentVotes(contentId: number) {
+    this.voteService.allVotes(contentId).subscribe({
+      next: (votes) => {
+        (this.allContentVotes = votes), this.reload();
+      },
+      error: () => {
+        this.router.navigateByUrl('contentNotFound');
+      },
+    });
+  }
 
+  addVote(contentId: number, newVote: Vote) {
+    this.voteService.creatingVote(contentId, newVote).subscribe({
+      next: (newVote) => {
+        this.newVote = new Vote();
+        this.reload();
+      },
+      error: (error) => {
+        console.error('Error creating vote');
+        console.error(error);
+      },
+    });
+  }
 
+  updateVote(contentId: number, voteId: number, vote: Vote) {
+    this.voteService.updatingVote(contentId, voteId, vote).subscribe({
+      next: (vote) => {
+        this.reload();
+      },
+      error: (kaboom: any) => {
+        console.error('Error updating vote');
+        console.error(kaboom);
+      },
+    });
+  }
 
+  getTotalVotes(votes: Vote[]) {
+    let num = 0;
+    for (let vote of votes) {
+      if (vote.upvoted !== null && vote.upvoted === false) {
+        num -= 1;
+      } else if (vote.upvoted !== null && vote.upvoted === true) {
+        num += 1;
+      }
+    }
+  }
 }
-

@@ -1,5 +1,6 @@
 import { ContentCategory } from "./content-category";
 import { User } from "./user";
+import { Vote } from "./vote";
 
 export class Content {
   id: number;
@@ -11,6 +12,7 @@ export class Content {
   lastUpdate: string | null;
   contentCategory: ContentCategory;
   user: User;
+  votes: Vote[];
 
   constructor(
     id: number = 0,
@@ -21,7 +23,8 @@ export class Content {
     createdDate: string = '',
     lastUpdate: string = '',
     contentCategory: ContentCategory = new ContentCategory(),
-    user: User = new User()
+    user: User = new User(),
+    votes: Vote[] = []
   ) {
     this.id = id;
     this.name = name;
@@ -32,5 +35,6 @@ export class Content {
     this.lastUpdate = lastUpdate;
     this.contentCategory = contentCategory;
     this.user = user;
+    this.votes = votes;
   }
 }
