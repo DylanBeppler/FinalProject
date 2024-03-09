@@ -47,7 +47,12 @@ public class ContentVoteServiceImpl implements ContentVoteService {
 	@Override
 	public ContentVote update(String username, int contentId, int voteId, ContentVote vote) {
 		ContentVote managedVote = voteRepo.findByUser_UsernameAndId(username, voteId);
-		if (managedVote != null) {
+		Content content = null;
+		Optional<Content> contentOpt = contentRepo.findById(contentId);
+		if (contentOpt.isPresent()) {
+			content = contentOpt.get();
+		}
+		if (managedVote != null && content == managedVote.getContent()) {
 			managedVote.setUpvoted(vote.getUpvoted());
 			return voteRepo.saveAndFlush(vote);
 		}
