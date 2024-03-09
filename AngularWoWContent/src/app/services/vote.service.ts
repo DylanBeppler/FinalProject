@@ -33,6 +33,20 @@ export class VoteService {
     return options;
   }
 
+  index(): Observable<Vote[]> {
+    return this.http.get<Vote[]>(this.url).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(
+              'VoteService.index(): error retrieving all votes: ' + err
+            )
+        );
+      })
+    );
+  }
+
   allVotes(contentId: number): Observable<Vote[]> {
     return this.http.get<Vote[]>(this.url + '/' + contentId + '/votes').pipe(
       catchError((err: any) => {
