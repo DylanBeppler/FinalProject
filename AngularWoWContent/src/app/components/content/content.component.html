@@ -7,10 +7,15 @@
         <div class="card-body">
           <h5 class="card-title">{{ content.name }}</h5>
           <p class="card-text">{{ content.description }}</p>
+          <br>
+          # of Votes <br>
+          <br>
           <small>Posted on: {{ content.createdDate | date }}</small>
           <button class="btn btn-primary" (click)="selectedContent = content">
             Content Details
           </button>
+          <span>&emsp;&#8679;</span>
+          <span>&emsp;&#8681;</span>
         </div>
       </div>
     </div>
@@ -24,6 +29,7 @@
         <h2>{{ selectedContent.name }}</h2>
         <p>{{ selectedContent.description }}</p>
         <p>{{ selectedContent.contentCategory.name }}</p>
+        <br>
       </div>
     </div>
     <br />
@@ -137,3 +143,5 @@
     <hr />
   </div>
 </div>
+<script data-require="angular.js@1.2.x" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"
+  data-semver="1.2.16"></script>

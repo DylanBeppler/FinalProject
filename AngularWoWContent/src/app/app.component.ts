@@ -25,7 +25,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
       LogoutComponent,
       RegisterComponent,
       MatSlideToggleModule
-
     ]
 
 })

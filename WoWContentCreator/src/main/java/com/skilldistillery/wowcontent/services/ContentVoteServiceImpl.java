@@ -27,6 +27,15 @@ public class ContentVoteServiceImpl implements ContentVoteService {
 	public List<ContentVote> index() {
 		return voteRepo.findAll();
 	}
+	
+	@Override
+	public List<ContentVote> showVotesByContentId(int contentId) {
+		Optional<Content> contentOpt = contentRepo.findById(contentId);
+		if (contentOpt.isPresent()) {
+			return contentOpt.get().getContentVotes();
+		}
+		return null;
+	}
 
 	@Override
 	public ContentVote create(String username, int contentId, ContentVote vote) {
