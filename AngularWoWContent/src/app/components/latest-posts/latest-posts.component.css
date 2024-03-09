@@ -1,6 +1,6 @@
 body {
-  margin: 0;
-  padding: 0;
+  background-repeat: no-repeat;
+  height: 100%;
   background-image: url('https://w.wallha.com/ws/15/GLB6JMYi.png');
   background-size: cover;
   background-position: center;
