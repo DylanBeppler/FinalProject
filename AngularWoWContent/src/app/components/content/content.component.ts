@@ -354,8 +354,8 @@ export class ContentComponent implements OnInit {
     });
   }
 
-  updateVote(contentId: number, voteId: number, vote: Vote) {
-    this.voteService.updatingVote(contentId, voteId, vote).subscribe({
+  updateVote(contentId: number, upvoted: boolean) {
+    this.voteService.updatingVote(contentId, upvoted).subscribe({
       next: (vote) => {
         this.reload();
       },
@@ -375,5 +375,7 @@ export class ContentComponent implements OnInit {
         num += 1;
       }
     }
+    return num;
   }
+
 }

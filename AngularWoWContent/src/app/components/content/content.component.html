@@ -8,18 +8,16 @@
           <h5 class="card-title">{{ content.name }}</h5>
           <p class="card-text">{{ content.description }}</p>
           <br>
+          {{getTotalVotes(content.contentVotes)}}
           # of Votes <br>
-          {{getTotalVotes(content.votes)}}
-          <!-- Figure out how to show the number of upvotes and downvotes based on the vote's boolean variable
-          Probably some sort of iterating and counting truthy vs non-truthy -->
           <br>
           <small>Posted on: {{ content.createdDate | date }}</small>
           <button class="btn btn-primary" (click)="selectedContent = content">
             Content Details
           </button>
-          <span>&emsp;&#8679;</span>
+          <span (click)="updateVote(content.id, true)">&emsp;&#8679;</span>
           <!-- Figure out how to add a vote if a user hasn't already voted, and update vote if they have -->
-          <span>&emsp;&#8681;</span>
+          <span (click)="updateVote(content.id, false)">&emsp;&#8681;</span>
         </div>
       </div>
     </div>
