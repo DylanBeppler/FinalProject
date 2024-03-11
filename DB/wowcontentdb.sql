@@ -212,9 +212,9 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `wowcontentdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `join_date`, `email`, `role`, `about_me`, `avatar_url`, `last_updated`, `battletag`) VALUES (1, 'blake', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, '2024/03/04', 'blake', 'test', 'test', 'test', '2024/03/23', 'test');
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `join_date`, `email`, `role`, `about_me`, `avatar_url`, `last_updated`, `battletag`) VALUES (2, 'zach', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, '2024/03/04', 'zach', 'test', 'test', 'test', '2024/03/23', 'test');
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `join_date`, `email`, `role`, `about_me`, `avatar_url`, `last_updated`, `battletag`) VALUES (3, 'dylan', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, '2024/03/04', 'dylan', 'test', 'test', 'test', '2024/03/23', 'test');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `join_date`, `email`, `role`, `about_me`, `avatar_url`, `last_updated`, `battletag`) VALUES (1, 'blake', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, '2024/03/04', 'blake', 'test', 'test', 'https://www.lightstalking.com/wp-content/uploads/stephanie-leblanc-JLMEZxBcXCU-unsplash.jpg', '2024/03/23', 'test');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `join_date`, `email`, `role`, `about_me`, `avatar_url`, `last_updated`, `battletag`) VALUES (2, 'zach', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, '2024/03/04', 'zach', 'test', 'test', 'https://www.lightstalking.com/wp-content/uploads/stephanie-leblanc-JLMEZxBcXCU-unsplash.jpg', '2024/03/23', 'test');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `join_date`, `email`, `role`, `about_me`, `avatar_url`, `last_updated`, `battletag`) VALUES (3, 'dylan', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, '2024/03/04', 'dylan', 'test', 'test', 'https://www.lightstalking.com/wp-content/uploads/stephanie-leblanc-JLMEZxBcXCU-unsplash.jpg', '2024/03/23', 'test');
 
 COMMIT;
 
