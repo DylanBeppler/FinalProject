@@ -14,17 +14,18 @@ import { Comment } from './../../models/comment';
 import { FormsModule } from '@angular/forms';
 import { ContentCommentPipe } from "../../pipes/content-comment.pipe";
 import { Vote } from '../../models/vote';
+import { VoteSortPipe } from "../../pipes/vote-sort.pipe";
 
 @Component({
-    selector: 'app-latest-posts',
+    selector: 'app-topposts',
     standalone: true,
-    templateUrl: './latest-posts.component.html',
-    styleUrl: './latest-posts.component.css',
-    imports: [CommonModule, ContentCategoryPipe, FormsModule, ContentCommentPipe]
+    templateUrl: './topposts.component.html',
+    styleUrl: './topposts.component.css',
+    imports: [CommonModule, ContentCategoryPipe, FormsModule, ContentCommentPipe, VoteSortPipe]
 })
-export class LatestPostsComponent {
+export class ToppostsComponent {
+
   selectedContent: Content | null = null;
-  latestContents: Content[] = [];
   editContent: Content | null = null;
 
   loggedInUser: User | null = null;
@@ -36,11 +37,13 @@ export class LatestPostsComponent {
 
   allContentVotes: Vote[] = [];
   newVote: Vote = new Vote();
+  topVotedContents: Content[] = [];
+  totalVotes: Number | null = null ;
 
   constructor(private contentService: ContentService,private commentService: CommentService, private auth: AuthService,  private router: Router, private voteService: VoteService) {}
 
   ngOnInit(): void {
-    this.loadLatestContent();
+    this.loadTopContent();
     this.setLoggedInUser();
   }
 
@@ -67,40 +70,37 @@ export class LatestPostsComponent {
   deleteContent(contentId: number) {
     this.contentService.destroy(contentId).subscribe({
       next: () => {
-        this.loadLatestContent();
+        this.loadTopContent();
       },
       error: () => {},
     });
   }
 
 
-  loadLatestContent(): void {
+  loadTopContent(): void {
     this.setLoggedInUser();
     this.contentService.index().subscribe({
       next: (contents) => {
-        this.latestContents = contents.sort((a, b) =>
-        {
-          return new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime();
-        })
-        .slice(0, 10);
+
+   this.topVotedContents = contents;
+
+
 
       },
       error: (err) => {
         console.error('Error fetching latest content', err);
       }
     });
+
+
     this.commentService.index().subscribe({
       next: (allComments) => {
         this.allComments = allComments;
       },
       error: (problem) => {
-        console.error(
-          'ContentComponent.reload(): error loading all comments: '
-        );
-        console.error(problem);
+        console.error('ContentComponent.reload(): error loading all comments: ', problem);
       },
     });
-
   }
 
   setEditComment(comment: Comment) {
@@ -111,7 +111,7 @@ export class LatestPostsComponent {
   getCommentsByContentId(contentId: number) {
     this.commentService.commentsByContentId(contentId).subscribe({
       next: (comment) => {
-        (this.allComments = comment), this.loadLatestContent();
+        (this.allComments = comment), this.loadTopContent();
       },
       error: () => {
         this.router.navigateByUrl('contentNotFound');
@@ -122,7 +122,7 @@ export class LatestPostsComponent {
   getCommentByCommentId(contentId: number, commentId: number) {
     this.commentService.commentByCommentId(contentId, commentId).subscribe({
       next: (comment) => {
-        (this.selectedComment = comment), this.loadLatestContent();
+        (this.selectedComment = comment), this.loadTopContent();
       },
       error: () => {
         this.router.navigateByUrl('contentNotFound');
@@ -133,7 +133,7 @@ export class LatestPostsComponent {
   getUserComments() {
     this.commentService.userComments().subscribe({
       next: (comment) => {
-        (this.selectedComment = comment), this.loadLatestContent();
+        (this.selectedComment = comment), this.loadTopContent();
       },
       error: () => {
         this.router.navigateByUrl('contentNotFound');
@@ -145,7 +145,7 @@ export class LatestPostsComponent {
     this.commentService.create(contentId, newComment).subscribe({
       next: (newComment) => {
         this.newComment = new Comment();
-        this.loadLatestContent();
+        this.loadTopContent();
       },
       error: () => {},
     });
@@ -163,7 +163,7 @@ export class LatestPostsComponent {
         if (goToDetail) {
           this.selectedComment = comment;
         }
-        this.loadLatestContent();
+        this.loadTopContent();
       },
       error: (kaboom: any) => {
         console.error('Error updating comment');
@@ -175,7 +175,7 @@ export class LatestPostsComponent {
   deleteComment(contentId: number, commentId: number) {
     this.commentService.destroy(contentId, commentId).subscribe({
       next: () => {
-        this.loadLatestContent();
+        this.loadTopContent();
       },
       error: () => {},
     });
@@ -184,7 +184,7 @@ export class LatestPostsComponent {
   updateVote(contentId: number, upvoted: boolean) {
     this.voteService.updatingVote(contentId, upvoted).subscribe({
       next: (vote) => {
-        this.loadLatestContent();
+        this.loadTopContent();
       },
       error: (kaboom: any) => {
         console.error('Error updating vote');
@@ -206,7 +206,6 @@ export class LatestPostsComponent {
   }
 
 
+
+
 }
-
-
-

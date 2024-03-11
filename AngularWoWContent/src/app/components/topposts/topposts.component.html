@@ -54,9 +54,9 @@
   </ng-template>
 
 
-  <div *ngIf="latestContents.length > 0; else noContent"></div>
+  <div *ngIf="topVotedContents.length > 0; else noContent"></div>
   <div class="row">
-    <div class="col-md-4 mb-3" style="width: 25rem" *ngFor="let content of latestContents">
+    <div class="col-md-4 mb-3" style="width: 25rem" *ngFor="let content of topVotedContents | voteSort">
       <a (click)="selectedContent = content" class="category-link">
       <div class="card category-box rounded-corners img-hover-effect">
         <img class="card-img-top" src="{{ content.imageUrl }}" alt="{{ content.name }}" />
@@ -77,6 +77,7 @@
   </div>
 </body>
   </html>
+
 
 
 
