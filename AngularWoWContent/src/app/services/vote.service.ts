@@ -103,13 +103,12 @@ export class VoteService {
 
   updatingVote(
     contentId: number,
-    voteId: number,
-    vote: Vote
+    upvote: boolean
   ): Observable<Vote> {
     return this.http
       .put<Vote>(
-        this.url + '/' + contentId + '/votes/' + voteId,
-        vote,
+        this.url + '/' + contentId + '/votes',
+        upvote,
         this.getHttpOptions()
       )
       .pipe(

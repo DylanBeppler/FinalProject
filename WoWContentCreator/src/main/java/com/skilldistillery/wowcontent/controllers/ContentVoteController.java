@@ -33,33 +33,32 @@ public class ContentVoteController {
 	private ContentService contentService;
 
 	@GetMapping("votes")
-	public List<ContentVote>showAllVotes() {
+	public List<ContentVote> showAllVotes() {
 		return voteService.index();
 	}
-	
-	
+
 	@GetMapping("content/{content_id}/votes")
 	public List<ContentVote> showVotesByContentId(@PathVariable("contentId") int contentId, HttpServletResponse resp) {
 		Content content = contentService.showContentById(contentId);
 		return voteService.showVotesByContentId(contentId);
 	}
 
-	@PostMapping("{contentId}/votes")
-	public ResponseEntity<ContentVote> create(@PathVariable int contentId, @RequestBody ContentVote vote,
-			Principal principal) {
-		ContentVote createdVote = voteService.create(principal.getName(), contentId, vote);
-		if (createdVote != null) {
-			return ResponseEntity.status(HttpStatus.CREATED).body(createdVote);
-		}
-		return ResponseEntity.badRequest().build();
-	}
+//	@PostMapping("content/{contentId}/votes")
+//	public ResponseEntity<ContentVote> create(@PathVariable int contentId, @RequestBody Boolean upvote,
+//			Principal principal) {
+//		ContentVote createdVote = voteService.create(principal.getName(), contentId, upvote);
+//		if (createdVote != null) {
+//			return ResponseEntity.status(HttpStatus.CREATED).body(createdVote);
+//		}
+//		return ResponseEntity.badRequest().build();
+//	}
 
-	@PutMapping("content/{content_id}/votes/{vote_id}")
-	public ContentVote updateContentVote(Principal principal, @RequestBody ContentVote contentVote,
-			@PathVariable("contentId") int contentId, @PathVariable("voteId") int voteId, HttpServletRequest req,
-			HttpServletResponse resp) {
+	@PutMapping("content/{content_id}/votes")
+	public ContentVote updateContentVote(Principal principal, @RequestBody Boolean upvoted,
+			@PathVariable("content_id") int contentId, HttpServletRequest req, HttpServletResponse resp) {
+		ContentVote contentVote = null;
 		try {
-			contentVote = voteService.update(principal.getName(), contentId, voteId, contentVote);
+			contentVote = voteService.update(principal.getName(), contentId, upvoted);
 			if (contentVote != null) {
 				resp.setStatus(201);
 			}

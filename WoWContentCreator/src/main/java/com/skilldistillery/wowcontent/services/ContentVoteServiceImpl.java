@@ -18,18 +18,18 @@ public class ContentVoteServiceImpl implements ContentVoteService {
 
 	@Autowired
 	private ContentVoteRepository voteRepo;
-	
+
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private ContentRepository contentRepo;
-	
+
 	@Override
 	public List<ContentVote> index() {
 		return voteRepo.findAll();
 	}
-	
+
 	@Override
 	public List<ContentVote> showVotesByContentId(int contentId) {
 		Optional<Content> contentOpt = contentRepo.findById(contentId);
@@ -39,32 +39,39 @@ public class ContentVoteServiceImpl implements ContentVoteService {
 		return null;
 	}
 
-	@Override
-	public ContentVote create(String username, int contentId, ContentVote vote) {
-		User user = userRepo.findByUsername(username);
-		Content content = null;
-		Optional<Content> contentOpt = contentRepo.findById(contentId);
-		if (contentOpt.isPresent()) {
-			content = contentOpt.get();
-		}
-		if (user != null && content != null) {
-			vote.setUser(user);
-			vote.setContent(content);
-			return voteRepo.saveAndFlush(vote);
-		}
-		return null;
-	}
+//	@Override
+//	public ContentVote create(String username, int contentId, ContentVote vote) {
+//		User user = userRepo.findByUsername(username);
+//		Content content = null;
+//		Optional<Content> contentOpt = contentRepo.findById(contentId);
+//		if (contentOpt.isPresent()) {
+//			content = contentOpt.get();
+//		}
+//		if (user != null && content != null) {
+//			vote.setUser(user);
+//			vote.setContent(content);
+//			return voteRepo.saveAndFlush(vote);
+//		}
+//		return null;
+//	}
 
 	@Override
-	public ContentVote update(String username, int contentId, int voteId, ContentVote vote) {
-		ContentVote managedVote = voteRepo.findByUser_UsernameAndId(username, voteId);
+	public ContentVote update(String username, int contentId, Boolean upvote) {
+		User user = userRepo.findByUsername(username);
+		ContentVote managedVote = voteRepo.findByUser_UsernameAndContent_Id(username, contentId);
 		Content content = null;
 		Optional<Content> contentOpt = contentRepo.findById(contentId);
 		if (contentOpt.isPresent()) {
 			content = contentOpt.get();
 		}
 		if (managedVote != null && content == managedVote.getContent()) {
-			managedVote.setUpvoted(vote.getUpvoted());
+			managedVote.setUpvoted(upvote);
+			return voteRepo.saveAndFlush(managedVote);
+		} else if (managedVote == null && user != null && content != null) {
+			ContentVote vote = new ContentVote();
+			vote.setUpvoted(upvote);
+			vote.setUser(user);
+			vote.setContent(content);
 			return voteRepo.saveAndFlush(vote);
 		}
 		return null;
