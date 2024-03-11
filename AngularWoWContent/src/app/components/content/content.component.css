@@ -19,3 +19,140 @@
   width: 50%;
   height: 50%;
 }
+
+/* --------------------------------- */
+
+
+
+body {
+  background-repeat: no-repeat;
+  height: 100%;
+  /* background-image: url('https://w.wallha.com/ws/15/GLB6JMYi.png'); */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+}
+
+.no-content {
+  text-align: center;
+  padding: 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  width: 100%; /* Adjust based on the width of the .col-md-4 */
+  overflow: hidden; /* Ensures the image doesn't overflow the card */
+  background-color: #ffffffee; /* White with some opacity */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.card-img-top {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensures the image covers the area */
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-title {
+  margin-bottom: 15px;
+}
+
+.card-text {
+  font-size: 0.9em;
+  margin-bottom: 15px;
+}
+
+small {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.8em;
+  color: #666;
+}
+
+.content {
+  text-align: center;
+}
+
+.content-container {
+  color: rgb(0, 0, 0);
+  border: 1px solid grey; /* Add a small grey border */
+  margin-bottom: 10px; /* Add space between comments */
+  padding: 10px; /* Add some padding inside the border */
+  border-radius: 4px;
+  min-width: 500px;
+}
+
+.category-link {
+  display: block; /* This will ensure the anchor tag behaves like a block-level element */
+  text-decoration: none; /* This will remove the underline from the link */
+  color: inherit; /* This ensures that the link color is the same as your text color */
+}
+
+.rounded-corners {
+  border-radius: 10px; /* Adjust the pixel value to increase or decrease the rounding */
+}
+
+
+.img-hover-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for the transform and shadow */
+}
+
+.img-hover-effect:hover {
+  transform: scale(1.01); /* Slightly increase the size */
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* White glow around the image */
+}
+
+.content-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Horizontally center the content */
+  justify-content: center; /* Vertically center the content (if you want to center the whole card vertically on the page) */
+  width: 55rem; /* Set the width of the card */
+  margin: auto; /* This will center the card in the available horizontal space */
+  margin-top: 50px; /* Add some top margin if needed */
+  overflow: hidden; /* Ensures the image doesn't overflow the card */
+  background-color: #ffffffee; /* White with some opacity */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  /* Ensure there's no other conflicting styles in your CSS */
+}
+
+#new-comment {
+  color: #000000; /* This changes the text color inside the new-comment div */
+}
+
+#new-comment label {
+  color: #000000; /* Change color of the label text if desired */
+}
+
+#new-comment .form-control {
+  font-size: 1rem; /* Adjust the font size of the textarea */
+  color: #333; /* Change the text color within the textarea */
+}
+
+#new-comment .form-control {
+  height: auto; /* Resets the height if it was set somewhere else */
+  width: 500px; /* This will make the textarea stretch to the width of its container */
+}
+
+.add-comment-btn {
+  width: 150px; /* Set the desired width */
+  /* If you want to center the button you could use margin: */
+  margin: 0 auto; /* Centers the button if the parent is a block with a specified width */
+}
+
+.avatar-image {
+  width: 10%;
+}
