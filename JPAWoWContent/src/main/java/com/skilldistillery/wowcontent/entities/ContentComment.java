@@ -37,7 +37,6 @@ public class ContentComment {
 
 	@ManyToOne
 	@JoinColumn(name = "content_id")
-	@JsonIgnore
 	private Content content;
 
 	@ManyToOne
