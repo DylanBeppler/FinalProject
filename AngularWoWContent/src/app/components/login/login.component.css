@@ -43,3 +43,12 @@
   margin-top: 10%; /* Adjust this value to center the modal vertically as you like */
   min-height: 200px;
 }
+
+.login-button {
+  width: 150px;
+}
+
+.login-modal-div {
+  padding: 10%;
+
+}
