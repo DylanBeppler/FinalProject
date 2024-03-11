@@ -102,3 +102,27 @@ small {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   /* Ensure there's no other conflicting styles in your CSS */
 }
+
+#new-comment {
+  color: #000000; /* This changes the text color inside the new-comment div */
+}
+
+#new-comment label {
+  color: #000000; /* Change color of the label text if desired */
+}
+
+#new-comment .form-control {
+  font-size: 1rem; /* Adjust the font size of the textarea */
+  color: #333; /* Change the text color within the textarea */
+}
+
+#new-comment .form-control {
+  height: auto; /* Resets the height if it was set somewhere else */
+  width: 500px; /* This will make the textarea stretch to the width of its container */
+}
+
+.add-comment-btn {
+  width: 150px; /* Set the desired width */
+  /* If you want to center the button you could use margin: */
+  margin: 0 auto; /* Centers the button if the parent is a block with a specified width */
+}

@@ -10,13 +10,14 @@ import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Comment } from './../../models/comment';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-latest-posts',
     standalone: true,
     templateUrl: './latest-posts.component.html',
     styleUrl: './latest-posts.component.css',
-    imports: [CommonModule, ContentCategoryPipe]
+    imports: [CommonModule, ContentCategoryPipe, FormsModule]
 })
 export class LatestPostsComponent {
   selectedContent: Content | null = null;
