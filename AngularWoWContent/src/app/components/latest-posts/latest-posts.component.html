@@ -1,7 +1,7 @@
 <html>
 <body>
 
-  <div *ngIf="selectedContent && !editContent">
+  <div *ngIf="selectedContent && !editContent" class="content-details">
     <div class="content">
       <div class="content-container">
         <img src="{{ selectedContent.imageUrl }}" class="rounded-corners img-hover-effect selected-content-img-size"
@@ -30,7 +30,7 @@
       <div class="content-container">
         <h2>{{ comment.user.username }}</h2>
         <p>{{ comment.message }}</p>
-        <p>{{ comment.updatedDate | date }}</p>
+        <small>{{ comment.updatedDate | date }}</small>
         <img src="{{ comment.user.avatarUrl }}" class="rounded-corners img-hover-effect selected-content-img-size"
           alt="{{ selectedContent.name }}" />
       </div>
