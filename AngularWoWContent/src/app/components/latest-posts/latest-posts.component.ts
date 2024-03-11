@@ -35,10 +35,27 @@ export class LatestPostsComponent {
 
   ngOnInit(): void {
     this.loadLatestContent();
+    this.setLoggedInUser();
   }
 
   isLoggedIn(): boolean {
     return this.auth.checkLogin();
+  }
+
+  setLoggedInUser(): void {
+    if (this.isLoggedIn()) {
+      this.auth.getLoggedInUser().subscribe({
+        next: (user) => {
+          this.loggedInUser = user;
+        },
+        error: (problem) => {
+          console.error(
+            'ContentComponent.setLoggedInUser(): error setting logged in user: '
+          );
+          console.error(problem);
+        },
+      });
+    }
   }
 
   deleteContent(contentId: number) {
