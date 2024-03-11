@@ -26,6 +26,7 @@ import { NavigationDialogComponent } from '../navigation/navigation.component';
 import { EditCommentComponent } from '../edit-comment/edit-comment.component';
 import { VoteService } from '../../services/vote.service';
 import { Vote } from '../../models/vote';
+import { ContentCommentPipe } from '../../pipes/content-comment.pipe';
 
 @Component({
   selector: 'app-content',
@@ -34,6 +35,7 @@ import { Vote } from '../../models/vote';
     CommonModule,
     FormsModule,
     ContentCategoryPipe,
+    ContentCommentPipe,
     MatButtonModule,
     MatDialogActions,
     MatDialogClose,

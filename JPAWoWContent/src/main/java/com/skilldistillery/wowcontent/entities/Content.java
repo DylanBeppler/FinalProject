@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,6 +44,7 @@ public class Content {
 	private User user;
 
 	@OneToMany(mappedBy = "content")
+	@JsonIgnoreProperties({"content"})
 	private List<ContentComment> contentComments;
 
 	@ManyToOne
