@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <div *ngIf="selectedContent && !editContent">
+  <div *ngIf="selectedContent && !editContent" class="content-details">
     <div class="content">
       <div class="content-container">
         <img src="{{ selectedContent.imageUrl }}" class="rounded-corners img-hover-effect selected-content-img-size"
@@ -46,10 +46,10 @@
       <div class="content" *ngFor="let comment of allComments | contentComment : selectedContent.id">
         <div class="content-container">
           <h2>{{ comment.user.username }}</h2>
-          <p>{{ comment.message }}</p>
-          <p>{{ comment.updatedDate | date }}</p>
-          <img src="{{ comment.user.avatarUrl }}" class="rounded-corners img-hover-effect selected-content-img-size"
+          <img src="{{ comment.user.avatarUrl }}" class="rounded-corners avatar-image"
             alt="{{ selectedContent.name }}" />
+          <p>Comment: {{ comment.message }}</p>
+          <p>Posted on: {{ comment.updatedDate | date }}</p>
         </div>
         <button class="btn btn-primary" (click)=" setEditComment(comment); openCommentDialog('500ms', '500ms');">Update
           Comment</button>
@@ -60,11 +60,25 @@
       </div>
       <hr />
     </div>
+    <div id="new-comment" *ngIf="!editComment && isLoggedIn() && selectedContent">
+      <form class="row g-3">
+        <div class="form-group">
+          <label for="comment">Comment</label>
+          <textarea class="form-control" rows="5" name="message" [(ngModel)]="newComment.message"></textarea>
+        </div>
+        <br>
+        <button class="btn btn-primary add-comment-btn" (click)="addComment(selectedContent.id, newComment)">
+          Add Comment
+        </button>
+      </form>
+      <hr>
+    </div>
   </div>
 
-  <div id="newContent" *ngIf="!selectedContent && !editContent && isLoggedIn() &&!editComment">
-    <form class="row g-3">
+  <div class="content-creation" *ngIf="!selectedContent && !editContent && isLoggedIn() &&!editComment">
+    <form class="content-container">
       <div class="col-md-6">
+       <h2>Create Content:</h2>
         <label for="name">Title</label>
         <input class="form-control" type="text" name="name" [(ngModel)]="newContent.name" />
       </div>
@@ -86,7 +100,7 @@
       </div>
       <br />
       <button class="btn btn-primary" (click)="createContent(newContent)">
-        Create
+        Create Content
       </button>
     </form>
     <br /><br /><br />
@@ -121,19 +135,6 @@
     </form>
   </div>
 
-  <div id="newComment" *ngIf="!editComment && isLoggedIn() && selectedContent">
-    <form class="row g-3">
-      <div class="form-group">
-        <label for="message">Message</label>
-        <textarea class="form-control" rows="5" name="message" [(ngModel)]="newComment.message"></textarea>
-      </div>
-      <br>
-      <button class="btn btn-primary" (click)="addComment(selectedContent.id, newComment)">
-        Add Comment
-      </button>
-    </form>
-    <hr>
-  </div>
 
 
 </div>
