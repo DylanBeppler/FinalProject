@@ -1,3 +1,4 @@
+import { VoteService } from './../../services/vote.service';
 import { ContentComponent } from './../content/content.component';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
@@ -11,13 +12,15 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Comment } from './../../models/comment';
 import { FormsModule } from '@angular/forms';
+import { ContentCommentPipe } from "../../pipes/content-comment.pipe";
+import { Vote } from '../../models/vote';
 
 @Component({
     selector: 'app-latest-posts',
     standalone: true,
     templateUrl: './latest-posts.component.html',
     styleUrl: './latest-posts.component.css',
-    imports: [CommonModule, ContentCategoryPipe, FormsModule]
+    imports: [CommonModule, ContentCategoryPipe, FormsModule, ContentCommentPipe]
 })
 export class LatestPostsComponent {
   selectedContent: Content | null = null;
@@ -31,7 +34,10 @@ export class LatestPostsComponent {
   selectedComment: Comment | null = null;
   allComments: Comment[] = [];
 
-  constructor(private contentService: ContentService,private commentService: CommentService, private auth: AuthService,  private router: Router) {}
+  allContentVotes: Vote[] = [];
+  newVote: Vote = new Vote();
+
+  constructor(private contentService: ContentService,private commentService: CommentService, private auth: AuthService,  private router: Router, private voteService: VoteService) {}
 
   ngOnInit(): void {
     this.loadLatestContent();
@@ -172,6 +178,30 @@ export class LatestPostsComponent {
       },
       error: () => {},
     });
+  }
+
+  updateVote(contentId: number, upvoted: boolean) {
+    this.voteService.updatingVote(contentId, upvoted).subscribe({
+      next: (vote) => {
+        this.loadLatestContent();
+      },
+      error: (kaboom: any) => {
+        console.error('Error updating vote');
+        console.error(kaboom);
+      },
+    });
+  }
+
+  getTotalVotes(votes: Vote[]) {
+    let num = 0;
+    for (let vote of votes) {
+      if (vote.upvoted !== null && vote.upvoted === false) {
+        num -= 1;
+      } else if (vote.upvoted !== null && vote.upvoted === true) {
+        num += 1;
+      }
+    }
+    return num;
   }
 
 

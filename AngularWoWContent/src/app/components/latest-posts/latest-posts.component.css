@@ -89,6 +89,7 @@ small {
 }
 
 .content-details {
+  padding: 2%;
   display: flex;
   flex-direction: column;
   align-items: center; /* Horizontally center the content */
