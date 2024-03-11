@@ -12,7 +12,7 @@ export class Content {
   lastUpdate: string | null;
   contentCategory: ContentCategory;
   user: User;
-  votes: Vote[];
+  contentVotes: Vote[];
 
   constructor(
     id: number = 0,
@@ -24,7 +24,7 @@ export class Content {
     lastUpdate: string = '',
     contentCategory: ContentCategory = new ContentCategory(),
     user: User = new User(),
-    votes: Vote[] = []
+    contentVotes: Vote[] = []
   ) {
     this.id = id;
     this.name = name;
@@ -35,6 +35,6 @@ export class Content {
     this.lastUpdate = lastUpdate;
     this.contentCategory = contentCategory;
     this.user = user;
-    this.votes = votes;
+    this.contentVotes = contentVotes;
   }
 }
