@@ -126,3 +126,7 @@ small {
   /* If you want to center the button you could use margin: */
   margin: 0 auto; /* Centers the button if the parent is a block with a specified width */
 }
+
+.avatar-image {
+  width: 10%;
+}
