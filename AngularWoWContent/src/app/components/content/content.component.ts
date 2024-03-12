@@ -168,6 +168,7 @@ export class ContentComponent implements OnInit {
         console.error(problem);
       },
     });
+    this.setLoggedInUser();
   }
 
   displayContent(content: Content) {
