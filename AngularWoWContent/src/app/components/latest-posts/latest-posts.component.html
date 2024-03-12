@@ -23,8 +23,8 @@
         <h2>{{ comment.user.username }}</h2>
         <img src="{{ comment.user.avatarUrl }}" class="rounded-corners avatar-image"
         alt="{{ selectedContent.name }}" />
-        <p>{{ comment.message }}</p>
-        <small>{{ comment.updatedDate | date }}</small>
+        <p>Comment: {{ comment.message }}</p>
+        <small>Posted on: {{ comment.updatedDate | date }}</small>
       </div>
       <!-- <button class="btn btn-primary" (click)=" setEditComment(comment); openCommentDialog('500ms', '500ms');">Update
         Comment</button> -->
