@@ -10,6 +10,12 @@
         <p>Description: {{ selectedContent.description }}</p>
         <p>Category: {{ selectedContent.contentCategory.name }}</p>
         <p>Created By: {{ selectedContent.user.username }} </p>
+        <br>
+        {{getTotalVotes(selectedContent.contentVotes)}}
+        # of Votes <br>
+        <br>
+        <span (click)="updateVote(selectedContent.id, true)">&emsp;&#8679;</span>
+        <span (click)="updateVote(selectedContent.id, false)">&emsp;&#8681;</span>
         <small>Posted on: {{ selectedContent.createdDate | date }}</small>
         <br>
      </div>
