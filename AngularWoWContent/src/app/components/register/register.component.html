@@ -23,6 +23,17 @@
             <input type="password" class="form-control" id="passwordModal" name="password" placeholder="Password" [(ngModel)]="newUser.password">
           </div>
 
+          <div class="mb-3 text-center">
+            <label for="battletagModal" class="form-label">Battletag</label>
+            <input type="text" class="form-control" id="battletagModal" name="battletag" placeholder="Battletag" [(ngModel)]="newUser.battletag">
+          </div>
+
+
+          <div class="mb-3 text-center">
+            <label for="avatarModal" class="form-label">Avatar Image</label>
+            <input type="text" class="form-control" id="avatarModal" name="avatar-image" placeholder="avatar-image" [(ngModel)]="newUser.avatarUrl">
+          </div>
+
           <div class="mb-3 d-grid gap-2">
             <button (click)="register(newUser)" type="submit" class="btn btn-primary register-button">Register Account</button>
           </div>
