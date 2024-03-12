@@ -9,6 +9,7 @@
           <h2>Name: {{ selectedContent.name }}</h2>
         <p>Description: {{ selectedContent.description }}</p>
         <p>Category: {{ selectedContent.contentCategory.name }}</p>
+        <p>Created By: {{ selectedContent.user.username }} </p>
         <small>Posted on: {{ selectedContent.createdDate | date }}</small>
         <br>
      </div>
@@ -24,6 +25,7 @@
         <img src="{{ comment.user.avatarUrl }}" class="rounded-corners avatar-image"
         alt="{{ selectedContent.name }}" />
         <p>Comment: {{ comment.message }}</p>
+        <small>Battle Tag: {{ comment.user.battletag }}</small>
         <small>Posted on: {{ comment.updatedDate | date }}</small>
       </div>
       <!-- <button class="btn btn-primary" *ngIf="loggedInUser && comment.user.id === loggedInUser.id" (click)=" setEditComment(comment); openCommentDialog('500ms', '500ms');">Update
