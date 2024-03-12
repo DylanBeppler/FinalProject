@@ -28,8 +28,8 @@
         <small>Battle Tag: {{ comment.user.battletag }}</small>
         <small>Posted on: {{ comment.updatedDate | date }}</small>
       </div>
-      <!-- <button class="btn btn-primary" *ngIf="loggedInUser && comment.user.id === loggedInUser.id" (click)=" setEditComment(comment); openCommentDialog('500ms', '500ms');">Update
-        Comment</button> -->
+      <button class="btn btn-primary" *ngIf="loggedInUser && comment.user.id === loggedInUser.id" (click)=" setEditComment(comment); openCommentDialog('500ms', '500ms');">Update
+        Comment</button>
       <button class="btn btn-danger" *ngIf="loggedInUser && comment.user.id === loggedInUser.id"
         (click)="deleteComment(selectedContent.id, comment.id)">
         Delete Comment
