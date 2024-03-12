@@ -6,9 +6,9 @@ export class Comment {
   message: string;
   enabled: boolean;
   imageUrl: string;
-  commentDate: string;
-  updatedDate: string | null;
-  content: Content;
+  commentDate: string | undefined;
+  updatedDate: string | null | undefined;
+  content: Content | undefined;
   user: User;
   replyToId: number | null;
 
