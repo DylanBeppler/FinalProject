@@ -129,11 +129,10 @@ export class CommentService {
     commentId: number,
     editComment: Comment
   ): Observable<Comment> {
-    // if (editComment) {
-    //   editComment.updatedDate = this.datePipe.transform(Date.now(), 'shortDate'); //  7/23/23
-    // } else {
-    //   editComment.updatedDate = '';
-    // }
+    delete editComment.commentDate;
+    delete editComment.updatedDate;
+    delete editComment.content;
+    console.log(editComment);
     return this.http
       .put<Comment>(
         this.urlContent + '/' + contentId + '/comments/' + commentId,
