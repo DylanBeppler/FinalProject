@@ -14,13 +14,36 @@ import { Comment } from './../../models/comment';
 import { FormsModule } from '@angular/forms';
 import { ContentCommentPipe } from "../../pipes/content-comment.pipe";
 import { Vote } from '../../models/vote';
+import { EditCommentComponent } from '../edit-comment/edit-comment.component';
+
+
+import {
+  MatDialog,
+  MatDialogRef,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogTitle,
+  MatDialogContent,
+} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @Component({
     selector: 'app-latest-posts',
     standalone: true,
     templateUrl: './latest-posts.component.html',
     styleUrl: './latest-posts.component.css',
-    imports: [CommonModule, ContentCategoryPipe, FormsModule, ContentCommentPipe]
+    imports: [
+      CommonModule,
+      ContentCategoryPipe,
+      FormsModule,
+      ContentCommentPipe,
+      MatButtonModule,
+      MatDialogActions,
+      MatDialogClose,
+      MatDialogTitle,
+      MatDialogContent
+    ]
 })
 export class LatestPostsComponent {
   selectedContent: Content | null = null;
@@ -37,7 +60,8 @@ export class LatestPostsComponent {
   allContentVotes: Vote[] = [];
   newVote: Vote = new Vote();
 
-  constructor(private contentService: ContentService,private commentService: CommentService, private auth: AuthService,  private router: Router, private voteService: VoteService) {}
+
+  constructor(private contentService: ContentService,private commentService: CommentService, private auth: AuthService,  private router: Router, private voteService: VoteService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadLatestContent();
@@ -180,6 +204,28 @@ export class LatestPostsComponent {
       error: () => {},
     });
   }
+
+
+  openCommentDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    let dialogRef = this.dialog.open(EditCommentComponent, {
+      data: {
+        editComment: this.editComment,
+        selectedContent: this.selectedContent,
+      },
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.editComment = null;
+      this.loadLatestContent();
+    });
+  }
+
+
 
   updateVote(contentId: number, upvoted: boolean) {
     this.voteService.updatingVote(contentId, upvoted).subscribe({

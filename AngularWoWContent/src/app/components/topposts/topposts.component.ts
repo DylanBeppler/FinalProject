@@ -16,12 +16,37 @@ import { ContentCommentPipe } from "../../pipes/content-comment.pipe";
 import { Vote } from '../../models/vote';
 import { VoteSortPipe } from "../../pipes/vote-sort.pipe";
 
+
+
+import {
+  MatDialog,
+  MatDialogRef,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogTitle,
+  MatDialogContent,
+} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { EditCommentComponent } from '../edit-comment/edit-comment.component';
+
+
 @Component({
     selector: 'app-topposts',
     standalone: true,
     templateUrl: './topposts.component.html',
     styleUrl: './topposts.component.css',
-    imports: [CommonModule, ContentCategoryPipe, FormsModule, ContentCommentPipe, VoteSortPipe]
+    imports: [
+      CommonModule,
+      ContentCategoryPipe,
+      FormsModule,
+      ContentCommentPipe,
+      VoteSortPipe,
+      MatButtonModule,
+      MatDialogActions,
+      MatDialogClose,
+      MatDialogTitle,
+      MatDialogContent
+        ]
 })
 export class ToppostsComponent {
 
@@ -40,7 +65,14 @@ export class ToppostsComponent {
   topVotedContents: Content[] = [];
   totalVotes: Number | null = null ;
 
-  constructor(private contentService: ContentService,private commentService: CommentService, private auth: AuthService,  private router: Router, private voteService: VoteService) {}
+  constructor(
+    private contentService: ContentService,
+    private commentService: CommentService,
+    private auth: AuthService,
+    private router: Router,
+    private voteService: VoteService,
+    public dialog: MatDialog
+         ) {}
 
   ngOnInit(): void {
     this.loadTopContent();
@@ -180,6 +212,27 @@ export class ToppostsComponent {
       error: () => {},
     });
   }
+
+
+  openCommentDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    let dialogRef = this.dialog.open(EditCommentComponent, {
+      data: {
+        editComment: this.editComment,
+        selectedContent: this.selectedContent,
+      },
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.editComment = null;
+      this.loadTopContent();
+    });
+  }
+
 
   updateVote(contentId: number, upvoted: boolean) {
     this.voteService.updatingVote(contentId, upvoted).subscribe({
