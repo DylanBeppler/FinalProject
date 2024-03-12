@@ -212,6 +212,7 @@ export class ContentComponent implements OnInit {
       next: (newContent) => {
         this.newContent = new Content();
         this.reload();
+        this.selectedContent = newContent;
       },
       error: () => {},
     });
