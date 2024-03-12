@@ -362,6 +362,17 @@ export class ContentComponent implements OnInit {
     this.voteService.updatingVote(contentId, upvoted).subscribe({
       next: (vote) => {
         this.reload();
+        if (this.selectedContent) {
+          this.contentService.show(contentId).subscribe(
+            (content: Content) => {
+              this.selectedContent = content;
+            },
+            (error) => {
+              console.error('Error fetching content:', error);
+              // Handle error as needed, e.g., redirect to an error page
+            }
+          );
+        }
       },
       error: (kaboom: any) => {
         console.error('Error updating vote');
